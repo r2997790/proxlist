@@ -14,61 +14,51 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500;600&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #111318; --surface: #1a1d24; --surface2: #22262f;
-  --border: #2a2e3a; --border2: #363b48;
-  --text: #e8eaf0; --text2: #8890a4; --text3: #4a5068;
-  --c-buy:#4ade80; --cb-buy:rgba(74,222,128,.12);
-  --c-collect:#60a5fa; --cb-collect:rgba(96,165,250,.12);
-  --c-do:#f472b6; --cb-do:rgba(244,114,182,.12);
-  --c-charge:#facc15; --cb-charge:rgba(250,204,21,.12);
-  --c-return:#fb923c; --cb-return:rgba(251,146,60,.12);
-  --c-drop:#a78bfa; --cb-drop:rgba(167,139,250,.12);
-  --c-remind:#2dd4bf; --cb-remind:rgba(45,212,191,.12);
-  --c-other:#94a3b8; --cb-other:rgba(148,163,184,.12);
-  --near:#4ade80; --gold:#e8c96a; --r:12px; --r-sm:8px;
+:root{
+  --bg:#111318;--surface:#1a1d24;--surface2:#22262f;
+  --border:#2a2e3a;--border2:#363b48;
+  --text:#e8eaf0;--text2:#8890a4;--text3:#4a5068;
+  --c-buy:#4ade80;--cb-buy:rgba(74,222,128,.12);
+  --c-collect:#60a5fa;--cb-collect:rgba(96,165,250,.12);
+  --c-do:#f472b6;--cb-do:rgba(244,114,182,.12);
+  --c-charge:#facc15;--cb-charge:rgba(250,204,21,.12);
+  --c-return:#fb923c;--cb-return:rgba(251,146,60,.12);
+  --c-drop:#a78bfa;--cb-drop:rgba(167,139,250,.12);
+  --c-remind:#2dd4bf;--cb-remind:rgba(45,212,191,.12);
+  --c-other:#94a3b8;--cb-other:rgba(148,163,184,.12);
+  --near:#4ade80;--gold:#e8c96a;--r:12px;--r-sm:8px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-height:100dvh;display:flex;flex-direction:column;font-size:15px;line-height:1.5}
 .app{display:flex;flex-direction:column;min-height:100dvh}
 
-/* Header */
 header{background:var(--surface);padding:13px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;gap:10px}
-.logo{font-family:'Instrument Serif',serif;font-size:20px;color:var(--text);letter-spacing:-.2px;flex-shrink:0}
-.logo sup{font-family:'Geist Mono',monospace;font-size:9px;background:var(--gold);color:#111;padding:1px 5px;border-radius:4px;vertical-align:super;letter-spacing:.5px;margin-left:3px;font-weight:600}
+.logo{font-family:'Instrument Serif',serif;font-size:20px;color:var(--text);flex-shrink:0}
+.logo sup{font-family:'Geist Mono',monospace;font-size:9px;background:var(--gold);color:#111;padding:1px 5px;border-radius:4px;vertical-align:super;margin-left:3px;font-weight:600}
 .header-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
-
-/* Install button */
-.install-btn{display:none;align-items:center;gap:5px;padding:5px 11px;border-radius:100px;font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.4px;border:1px solid var(--gold);color:var(--gold);cursor:pointer;background:transparent;transition:all .2s;animation:pulse-gold 2s infinite}
+.install-btn{display:none;align-items:center;gap:5px;padding:5px 11px;border-radius:100px;font-family:'Geist Mono',monospace;font-size:10px;border:1px solid var(--gold);color:var(--gold);cursor:pointer;background:transparent;animation:pulse-gold 2s infinite}
 .install-btn.visible{display:flex}
 @keyframes pulse-gold{0%,100%{box-shadow:0 0 0 0 rgba(232,201,106,.3)}50%{box-shadow:0 0 0 4px rgba(232,201,106,0)}}
-
-/* GPS button */
 .gps-btn{display:flex;align-items:center;gap:6px;padding:5px 11px;border-radius:100px;font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.5px;border:1px solid var(--border2);color:var(--text3);cursor:pointer;background:transparent;transition:all .2s;white-space:nowrap}
 .gps-btn.live{border-color:var(--near);color:var(--near)}
 .gps-btn.err{border-color:#f87171;color:#f87171}
 .gps-dot{width:6px;height:6px;border-radius:50%;background:currentColor}
-.gps-btn.live .gps-dot{animation:pulse-gps 1.4s infinite}
-@keyframes pulse-gps{0%,100%{opacity:1}50%{opacity:.25}}
+.gps-btn.live .gps-dot{animation:blink 1.4s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
 
-/* Nav */
 nav{background:var(--surface);display:flex;border-bottom:1px solid var(--border)}
-.nav-btn{flex:1;padding:9px 4px 10px;text-align:center;font-size:9px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;color:var(--text3);border:none;background:transparent;cursor:pointer;border-bottom:2px solid transparent;font-family:'Geist',sans-serif;display:flex;flex-direction:column;align-items:center;gap:3px;transition:color .15s}
+.nav-btn{flex:1;padding:9px 4px 10px;font-size:9px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;color:var(--text3);border:none;background:transparent;cursor:pointer;border-bottom:2px solid transparent;font-family:'Geist',sans-serif;display:flex;flex-direction:column;align-items:center;gap:3px;transition:color .15s}
 .nav-btn .ni{font-size:17px;line-height:1}
 .nav-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
 
-/* Content */
 .content{flex:1;overflow-y:auto}
 .panel{display:none;padding:16px;flex-direction:column;gap:12px}
 .panel.active{display:flex}
 
-/* Section heading */
 .sec-head{display:flex;align-items:center;justify-content:space-between}
-.sec-head h2{font-family:'Instrument Serif',serif;font-size:22px;color:var(--text)}
-.btn-add{background:var(--surface2);color:var(--text);border:1px solid var(--border2);border-radius:var(--r-sm);padding:7px 14px;font-family:'Geist',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:background .15s}
-.btn-add:active{background:var(--border)}
+.sec-head h2{font-family:'Instrument Serif',serif;font-size:22px}
+.btn-add{background:var(--surface2);color:var(--text);border:1px solid var(--border2);border-radius:var(--r-sm);padding:7px 14px;font-family:'Geist',sans-serif;font-size:13px;font-weight:600;cursor:pointer}
 
-/* Cards */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color .3s}
 .card.near{border-color:var(--near);box-shadow:0 0 0 1px rgba(74,222,128,.2),0 4px 20px rgba(74,222,128,.08)}
 .card-head{padding:13px 15px;display:flex;align-items:center;gap:11px;cursor:pointer;user-select:none}
@@ -77,66 +67,81 @@ nav{background:var(--surface);display:flex;border-bottom:1px solid var(--border)
 .card-info h3{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card-info p{font-size:11px;color:var(--text2);font-family:'Geist Mono',monospace;margin-top:2px}
 
-/* Badges */
 .badge{font-family:'Geist Mono',monospace;font-size:10px;font-weight:600;padding:3px 9px;border-radius:100px;white-space:nowrap;flex-shrink:0}
 .badge-near{background:rgba(74,222,128,.15);color:var(--near)}
 .badge-mid{background:rgba(250,204,21,.12);color:#facc15}
 .badge-far{background:var(--surface2);color:var(--text3)}
 
-/* Card body */
 .card-body{border-top:1px solid var(--border)}
 .card-body.hidden{display:none}
 
-/* Task items */
-.task-item{display:flex;align-items:center;gap:10px;padding:9px 15px;border-bottom:1px solid var(--border);transition:background .1s}
+.task-item{display:flex;align-items:center;gap:10px;padding:9px 15px;border-bottom:1px solid var(--border)}
 .task-item:last-of-type{border-bottom:none}
 .task-check{width:21px;height:21px;border-radius:5px;border:1.5px solid var(--border2);background:transparent;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;color:transparent;transition:all .15s}
 .task-check.done{background:var(--near);border-color:var(--near);color:#0a1a10}
 .task-body{flex:1;min-width:0}
 .task-name{font-size:13px;line-height:1.3;word-break:break-word}
 .task-name.done{text-decoration:line-through;color:var(--text3)}
-.task-meta{display:flex;align-items:center;gap:6px;margin-top:3px;flex-wrap:wrap}
+.task-meta{display:flex;align-items:center;gap:5px;margin-top:3px;flex-wrap:wrap}
 .task-type-pill{font-family:'Geist Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.4px;padding:2px 7px;border-radius:100px;text-transform:uppercase}
 .task-note{font-size:11px;color:var(--text3);font-family:'Geist Mono',monospace}
-.task-del{background:none;border:none;color:var(--text3);cursor:pointer;font-size:15px;padding:0 2px;opacity:0;transition:opacity .15s;flex-shrink:0}
+.task-del{background:none;border:none;color:var(--text3);cursor:pointer;font-size:15px;padding:0 2px;opacity:0;flex-shrink:0}
 .task-item:hover .task-del{opacity:1}
 
-/* Add task */
+/* Expiry badge */
+.exp-badge{font-family:'Geist Mono',monospace;font-size:9px;padding:2px 6px;border-radius:100px;background:rgba(251,146,60,.15);color:#fb923c;white-space:nowrap}
+.exp-badge.soon{background:rgba(248,113,113,.18);color:#f87171}
+
 .add-task-area{background:var(--surface2);border-top:1px dashed var(--border2);padding:10px 12px;display:flex;flex-direction:column;gap:8px}
-.add-task-row1{display:flex;gap:8px;align-items:center}
-.add-task-row1 input{flex:1;background:transparent;border:none;font-family:'Geist',sans-serif;font-size:13px;color:var(--text);outline:none}
-.add-task-row1 input::placeholder{color:var(--text3)}
-.add-task-row2{display:flex;gap:5px;align-items:center;flex-wrap:wrap}
-.type-chip{font-family:'Geist Mono',monospace;font-size:10px;padding:4px 8px;border-radius:100px;border:1px solid var(--border2);background:transparent;color:var(--text3);cursor:pointer;transition:all .15s;letter-spacing:.3px}
+.add-task-r1{display:flex;gap:8px;align-items:center}
+.add-task-r1 input{flex:1;background:transparent;border:none;font-family:'Geist',sans-serif;font-size:13px;color:var(--text);outline:none}
+.add-task-r1 input::placeholder{color:var(--text3)}
+.add-task-r2{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.type-chip{font-family:'Geist Mono',monospace;font-size:10px;padding:4px 8px;border-radius:100px;border:1px solid var(--border2);background:transparent;color:var(--text3);cursor:pointer;transition:all .15s}
 .type-chip.sel{border-color:currentColor}
-.task-note-in{flex:1;background:transparent;border:none;font-family:'Geist Mono',monospace;font-size:11px;color:var(--text2);outline:none;min-width:60px}
-.task-note-in::placeholder{color:var(--text3)}
+.note-in{flex:1;background:transparent;border:none;font-family:'Geist Mono',monospace;font-size:11px;color:var(--text2);outline:none;min-width:60px}
+.note-in::placeholder{color:var(--text3)}
+.exp-in{background:transparent;border:1px solid var(--border2);border-radius:5px;font-family:'Geist Mono',monospace;font-size:10px;color:var(--text2);padding:3px 6px;outline:none}
+
 .icon-btn{width:30px;height:30px;border-radius:var(--r-sm);border:none;background:var(--near);color:#0a1a10;font-size:18px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity .15s}
 .icon-btn:active{opacity:.7}
 .icon-btn.neutral{background:var(--surface2);color:var(--text2);border:1px solid var(--border2)}
+.icon-btn.amber{background:#fb923c;color:#1a0a0a}
 
-/* Card actions */
 .card-actions{display:flex;gap:8px;padding:9px 12px;border-top:1px solid var(--border);background:var(--surface2);flex-wrap:wrap;align-items:center}
 .act-btn{font-family:'Geist Mono',monospace;font-size:10px;padding:5px 10px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;transition:all .15s}
 .act-btn:hover{border-color:var(--text2);color:var(--text)}
 .act-btn.red:hover{border-color:#f87171;color:#f87171}
+.act-btn.green{border-color:rgba(74,222,128,.4);color:var(--near)}
 .linked-pill{margin-left:auto;font-size:10px;color:var(--text3);font-family:'Geist Mono',monospace}
 
-/* Progress */
 .prog-bar{height:2px;background:var(--surface2)}
 .prog-fill{height:100%;border-radius:1px;transition:width .3s}
 
+/* Quick add task to place */
+.place-quick{padding:10px 15px;border-top:1px dashed var(--border2);background:var(--surface2);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.place-quick input{flex:1;min-width:100px;background:transparent;border:none;font-family:'Geist',sans-serif;font-size:13px;color:var(--text);outline:none}
+.place-quick input::placeholder{color:var(--text3)}
+.place-quick select{background:var(--surface);border:1px solid var(--border2);border-radius:5px;color:var(--text2);font-size:10px;padding:4px 5px;font-family:'Geist Mono',monospace;max-width:90px}
+
+/* GPS update pin button in place card */
+.pin-update-row{display:flex;align-items:center;gap:10px;padding:8px 15px;border-top:1px solid var(--border);background:rgba(74,222,128,.04)}
+.pin-update-row .pu-info{flex:1;font-size:11px;font-family:'Geist Mono',monospace;color:var(--text3)}
+.pin-update-row .pu-info strong{color:var(--near);font-weight:600}
+.pin-update-btn{font-family:'Geist Mono',monospace;font-size:10px;padding:5px 11px;border-radius:6px;border:1px solid var(--near);color:var(--near);background:transparent;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.pin-update-btn:active{background:rgba(74,222,128,.1)}
+
 /* Nearby banner */
-.nearby-card{background:linear-gradient(135deg,rgba(74,222,128,.12) 0%,rgba(74,222,128,.04) 100%);border:1px solid rgba(74,222,128,.35);border-radius:var(--r);padding:14px 16px;display:flex;gap:13px;align-items:flex-start;animation:appear .35s cubic-bezier(.34,1.4,.64,1)}
+.nearby-card{background:linear-gradient(135deg,rgba(74,222,128,.12),rgba(74,222,128,.04));border:1px solid rgba(74,222,128,.35);border-radius:var(--r);padding:14px 16px;display:flex;gap:13px;align-items:flex-start;animation:appear .35s cubic-bezier(.34,1.4,.64,1)}
 @keyframes appear{from{transform:scale(.97);opacity:0}to{transform:scale(1);opacity:1}}
-.nearby-card .nc-ico{font-size:26px;flex-shrink:0;margin-top:2px}
-.nearby-card .nc-body{flex:1;min-width:0}
-.nearby-card h3{font-size:15px;font-weight:700;color:var(--near);margin-bottom:2px}
-.nearby-card .nc-sub{font-size:11px;color:var(--text2);font-family:'Geist Mono',monospace;margin-bottom:8px}
+.nc-ico{font-size:26px;flex-shrink:0;margin-top:2px}
+.nc-body{flex:1;min-width:0}
+.nc-body h3{font-size:15px;font-weight:700;color:var(--near);margin-bottom:2px}
+.nc-sub{font-size:11px;color:var(--text2);font-family:'Geist Mono',monospace;margin-bottom:8px}
 .task-chips{display:flex;flex-wrap:wrap;gap:5px}
 .tc-chip{font-size:11px;padding:3px 9px;border-radius:100px;border:1px solid var(--border2);color:var(--text2);font-family:'Geist Mono',monospace}
 
-/* Modals / sheets */
+/* Modals */
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:400;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px)}
 .overlay.show{display:flex}
 .sheet{background:var(--surface);border:1px solid var(--border);border-bottom:none;border-radius:18px 18px 0 0;padding:20px 18px 44px;width:100%;max-width:560px;max-height:92dvh;overflow-y:auto;display:flex;flex-direction:column;gap:14px;animation:sheet-rise .28s cubic-bezier(.34,1.1,.64,1)}
@@ -144,68 +149,101 @@ nav{background:var(--surface);display:flex;border-bottom:1px solid var(--border)
 .sheet-handle{width:36px;height:4px;background:var(--border2);border-radius:2px;align-self:center;margin-bottom:2px}
 .sheet h2{font-family:'Instrument Serif',serif;font-size:22px}
 
-/* Fields */
 .field{display:flex;flex-direction:column;gap:6px}
 .field label{font-family:'Geist Mono',monospace;font-size:10px;font-weight:600;color:var(--text3);letter-spacing:.8px;text-transform:uppercase}
-input[type=text],input[type=number],select,textarea{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:11px 13px;font-family:'Geist',sans-serif;font-size:14px;color:var(--text);width:100%;outline:none;-webkit-appearance:none;transition:border-color .2s}
+input[type=text],input[type=number],input[type=datetime-local],select,textarea{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:11px 13px;font-family:'Geist',sans-serif;font-size:14px;color:var(--text);width:100%;outline:none;-webkit-appearance:none;transition:border-color .2s}
 input:focus,select:focus,textarea:focus{border-color:var(--border2)}
 select option{background:var(--surface2)}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
 .btn{padding:13px;border-radius:var(--r-sm);border:none;font-family:'Geist',sans-serif;font-size:14px;font-weight:700;cursor:pointer;width:100%;transition:opacity .15s,transform .1s}
 .btn:active{transform:scale(.98);opacity:.85}
 .btn-prim{background:var(--text);color:var(--bg)}
 .btn-ghost{background:var(--surface2);color:var(--text2);border:1px solid var(--border2)}
 .btn-dest{background:rgba(248,113,113,.15);color:#f87171;border:1px solid rgba(248,113,113,.3)}
-.btn-sm{padding:9px 13px;font-size:13px}
+.btn-gold{background:var(--gold);color:#111;font-weight:700}
+.btn-sm{padding:9px 13px;font-size:12px}
+.btn-auto{width:auto}
 
 /* Address search */
-.addr-search-wrap{position:relative}
-.addr-search-wrap input{padding-right:40px}
-.addr-search-btn{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;color:var(--text2);padding:4px}
+.addr-wrap{position:relative}
+.addr-wrap input{padding-right:40px}
+.addr-search-btn{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;color:var(--text2)}
 .addr-results{background:var(--surface2);border:1px solid var(--border2);border-radius:var(--r-sm);margin-top:4px;overflow:hidden;display:none}
 .addr-results.show{display:block}
-.addr-result-item{padding:10px 13px;cursor:pointer;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:10px;transition:background .1s}
+.addr-result-item{padding:10px 13px;cursor:pointer;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:10px}
 .addr-result-item:last-child{border-bottom:none}
 .addr-result-item:active{background:var(--border)}
-.addr-result-item .ar-icon{font-size:16px;flex-shrink:0;margin-top:1px}
-.addr-result-item .ar-text{flex:1;min-width:0}
-.addr-result-item .ar-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.addr-result-item .ar-addr{font-size:11px;color:var(--text3);font-family:'Geist Mono',monospace;margin-top:2px}
-.addr-no-results{padding:12px 13px;font-size:12px;color:var(--text3);font-family:'Geist Mono',monospace;text-align:center}
-.addr-loading{padding:12px 13px;font-size:12px;color:var(--text3);font-family:'Geist Mono',monospace;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px}
+.ar-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.ar-text{flex:1;min-width:0}
+.ar-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ar-addr{font-size:11px;color:var(--text3);font-family:'Geist Mono',monospace;margin-top:2px}
+.addr-status{padding:12px 13px;font-size:12px;color:var(--text3);font-family:'Geist Mono',monospace;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px}
 
-/* Coords display (after address pick) */
-.coords-confirm{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.25);border-radius:var(--r-sm);padding:10px 13px;font-family:'Geist Mono',monospace;font-size:12px;color:var(--near);display:none;align-items:center;gap:8px}
-.coords-confirm.show{display:flex}
+/* Dual position */
+.geo-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.geo-row{display:flex;align-items:center;gap:10px}
+.geo-label{font-family:'Geist Mono',monospace;font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;width:56px;flex-shrink:0}
+.geo-val{font-family:'Geist Mono',monospace;font-size:11px;color:var(--text3);flex:1;line-height:1.4}
+.geo-val.set{color:var(--near)}
+.geo-update-btn{font-family:'Geist Mono',monospace;font-size:10px;padding:5px 10px;border-radius:6px;border:1px solid var(--near);color:var(--near);background:transparent;cursor:pointer;flex-shrink:0}
+.geo-divider{border:none;border-top:1px solid var(--border);margin:0}
 
 /* List linker */
-.list-link-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--r-sm);background:var(--surface2);border:1px solid var(--border);cursor:pointer;transition:border-color .15s;user-select:none}
+.list-link-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--r-sm);background:var(--surface2);border:1px solid var(--border);cursor:pointer;user-select:none;transition:border-color .15s}
 .list-link-row.sel{border-color:var(--near);background:rgba(74,222,128,.06)}
-.list-link-row .ll-ico{font-size:18px}
-.list-link-row .ll-text{flex:1}
-.list-link-row .ll-name{font-size:13px;font-weight:600}
-.list-link-row .ll-meta{font-size:10px;color:var(--text3);font-family:'Geist Mono',monospace}
-.list-link-row .ll-check{font-size:14px;color:var(--near);width:16px;text-align:center}
+.ll-ico{font-size:18px}
+.ll-text{flex:1}
+.ll-name{font-size:13px;font-weight:600}
+.ll-meta{font-size:10px;color:var(--text3);font-family:'Geist Mono',monospace}
+.ll-check{font-size:14px;color:var(--near);width:16px;text-align:center}
 
-/* Alert */
+/* Alert rules */
+.rule-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden}
+.rule-card.active-now{border-color:var(--near)}
+.rule-head{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer}
+.rh-icon{font-size:15px;flex-shrink:0}
+.rh-info{flex:1;min-width:0}
+.rh-label{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rh-meta{font-size:10px;color:var(--text3);font-family:'Geist Mono',monospace;margin-top:1px}
+.rh-badge{font-family:'Geist Mono',monospace;font-size:9px;padding:2px 7px;border-radius:100px}
+.rh-del{background:none;border:none;color:var(--text3);cursor:pointer;font-size:14px;padding:2px 4px;flex-shrink:0}
+.rule-body{border-top:1px solid var(--border);padding:12px;display:flex;flex-direction:column;gap:10px}
+.rule-body.hidden{display:none}
+.day-picker{display:flex;gap:4px;flex-wrap:wrap}
+.day-btn{font-family:'Geist Mono',monospace;font-size:10px;font-weight:600;width:34px;height:34px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.day-btn.sel{background:var(--gold);border-color:var(--gold);color:#111}
+.time-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.time-row input[type=time]{width:auto;flex:1;min-width:100px;font-family:'Geist Mono',monospace;font-size:13px}
+.time-sep{color:var(--text3);font-size:12px;font-family:'Geist Mono',monospace;flex-shrink:0}
+.date-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.date-chip{font-family:'Geist Mono',monospace;font-size:10px;padding:3px 8px;border-radius:100px;background:rgba(96,165,250,.15);color:#60a5fa;display:flex;align-items:center;gap:4px}
+.date-chip button{background:none;border:none;color:inherit;cursor:pointer;font-size:12px;padding:0}
+.rule-list-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:6px;background:var(--surface);border:1px solid var(--border);cursor:pointer;user-select:none;transition:border-color .15s}
+.rule-list-item.sel{border-color:var(--near);background:rgba(74,222,128,.06)}
+.rli-check{font-size:12px;color:var(--near);width:14px;text-align:center}
+.rli-label{font-size:12px;flex:1}
+.rule-active-pip{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--near);margin-right:4px;animation:blink 1.4s infinite}
+
+/* Alert overlay */
 .alert-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:600;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
 .alert-overlay.show{display:flex}
 .alert-box{background:var(--surface);border:1px solid rgba(74,222,128,.4);border-radius:20px;padding:28px 24px;max-width:86vw;text-align:center;box-shadow:0 0 60px rgba(74,222,128,.15),0 20px 60px rgba(0,0,0,.5);animation:alert-pop .35s cubic-bezier(.34,1.5,.64,1)}
 @keyframes alert-pop{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
-.alert-box .al-ico{font-size:48px;margin-bottom:10px}
+.al-ico{font-size:48px;margin-bottom:10px}
 .alert-box h2{font-family:'Instrument Serif',serif;font-size:22px;color:var(--near);margin-bottom:4px}
-.alert-box .al-loc{font-size:12px;color:var(--text2);font-family:'Geist Mono',monospace;margin-bottom:16px}
+.al-loc{font-size:12px;color:var(--text2);font-family:'Geist Mono',monospace;margin-bottom:16px}
 .alert-tasks{background:var(--surface2);border-radius:var(--r-sm);padding:12px;text-align:left;margin-bottom:18px;max-height:240px;overflow-y:auto}
-.alert-tasks .at-head{font-size:10px;font-family:'Geist Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.at-head{font-size:10px;font-family:'Geist Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
 .alert-task-row{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px}
 .alert-task-row:last-child{border-bottom:none}
-.alert-task-row .at-type{font-size:9px;font-family:'Geist Mono',monospace;flex-shrink:0;margin-top:3px}
+.at-type{font-size:9px;font-family:'Geist Mono',monospace;flex-shrink:0;margin-top:3px}
 
 /* AI panel */
 .ai-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:13px}
 .ai-panel h3{font-family:'Instrument Serif',serif;font-size:20px;display:flex;align-items:center;gap:8px}
 .ai-panel p{font-size:13px;color:var(--text2);line-height:1.55}
-.ai-suggestion{background:var(--surface2);border:1px solid var(--border2);border-radius:var(--r-sm);padding:11px 13px;display:flex;align-items:center;gap:11px;cursor:pointer;transition:border-color .15s,background .15s}
+.ai-suggestion{background:var(--surface2);border:1px solid var(--border2);border-radius:var(--r-sm);padding:11px 13px;display:flex;align-items:center;gap:11px;cursor:pointer}
 .ai-suggestion:active{background:var(--border)}
 .ai-sug-ico{font-size:22px;flex-shrink:0}
 .ai-sug-body{flex:1;min-width:0}
@@ -214,6 +252,7 @@ select option{background:var(--surface2)}
 .ai-sug-action{font-size:11px;color:var(--gold);font-family:'Geist Mono',monospace;flex-shrink:0}
 .ai-loading{display:none;align-items:center;gap:10px;font-size:13px;color:var(--text2);font-family:'Geist Mono',monospace}
 .ai-loading.show{display:flex}
+
 .spinner{width:18px;height:18px;border:2px solid var(--border2);border-top-color:var(--gold);border-radius:50%;animation:spin .6s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
@@ -223,7 +262,7 @@ select option{background:var(--surface2)}
 .setting-card .si h4{font-size:14px;font-weight:600}
 .setting-card .si p{font-size:11px;color:var(--text3);font-family:'Geist Mono',monospace;margin-top:2px}
 .radius-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px}
-.radius-card .rv{font-family:'Geist Mono',monospace;font-size:26px;font-weight:600;color:var(--near);margin:6px 0 10px}
+.rv{font-family:'Geist Mono',monospace;font-size:26px;font-weight:600;color:var(--near);margin:6px 0 10px}
 .toggle{width:44px;height:24px;background:var(--border2);border-radius:100px;border:none;cursor:pointer;position:relative;flex-shrink:0;transition:background .2s}
 .toggle.on{background:var(--near)}
 .toggle::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:white;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.3)}
@@ -231,28 +270,22 @@ select option{background:var(--surface2)}
 input[type=range]{-webkit-appearance:none;width:100%;height:3px;border-radius:2px;background:var(--border2);border:none;padding:0}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--text);cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.4)}
 
-/* Install card */
-.install-card{background:linear-gradient(135deg,rgba(232,201,106,.1) 0%,rgba(232,201,106,.04) 100%);border:1px solid rgba(232,201,106,.3);border-radius:var(--r);padding:16px;display:none;flex-direction:column;gap:12px}
+.install-card{background:linear-gradient(135deg,rgba(232,201,106,.1),rgba(232,201,106,.04));border:1px solid rgba(232,201,106,.3);border-radius:var(--r);padding:16px;display:none;flex-direction:column;gap:12px}
 .install-card.show{display:flex}
 .install-card h3{font-family:'Instrument Serif',serif;font-size:18px;color:var(--gold)}
 .install-card p{font-size:13px;color:var(--text2);line-height:1.5}
-.install-card .steps{display:flex;flex-direction:column;gap:6px}
-.install-card .step{display:flex;gap:10px;align-items:flex-start;font-size:13px}
-.install-card .step-num{font-family:'Geist Mono',monospace;font-size:10px;background:rgba(232,201,106,.2);color:var(--gold);width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.btn-gold{background:var(--gold);color:#111;font-weight:700}
+.steps{display:flex;flex-direction:column;gap:6px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:13px}
+.step-num{font-family:'Geist Mono',monospace;font-size:10px;background:rgba(232,201,106,.2);color:var(--gold);width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
 
-/* Empty */
 .empty{text-align:center;padding:50px 20px;color:var(--text3)}
 .empty .ei{font-size:42px;margin-bottom:12px;opacity:.35}
 .empty p{font-size:13px;line-height:1.6}
-
-/* Toast */
-.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--text);color:var(--bg);padding:9px 20px;border-radius:100px;font-size:13px;font-weight:700;z-index:999;pointer-events:none;transition:transform .28s cubic-bezier(.34,1.4,.64,1);white-space:nowrap;font-family:'Geist',sans-serif}
-.toast.show{transform:translateX(-50%) translateY(0)}
-
 .hint{font-size:12px;color:var(--text3);font-family:'Geist Mono',monospace;background:var(--surface2);border-left:2px solid var(--border2);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:9px 12px;line-height:1.5}
 
-/* type colors */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--text);color:var(--bg);padding:9px 20px;border-radius:100px;font-size:13px;font-weight:700;z-index:999;pointer-events:none;transition:transform .28s cubic-bezier(.34,1.4,.64,1);white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
 .t-buy{color:var(--c-buy);background:var(--cb-buy)}
 .t-collect{color:var(--c-collect);background:var(--cb-collect)}
 .t-do{color:var(--c-do);background:var(--cb-do)}
@@ -265,20 +298,15 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 </head>
 <body>
 <div class="app">
-
 <header>
-  <div class="logo">ProxAlert <sup>v3</sup></div>
+  <div class="logo">ProxAlert <sup>v4</sup></div>
   <div class="header-right">
-    <button class="install-btn" id="installBtn" onclick="promptInstall()">
-      ⬇ Install App
-    </button>
+    <button class="install-btn" id="installBtn" onclick="promptInstall()">⬇ Install</button>
     <button class="gps-btn" id="gpsBtn" onclick="toggleGPS()">
-      <div class="gps-dot"></div>
-      <span id="gpsLabel">GPS OFF</span>
+      <div class="gps-dot"></div><span id="gpsLabel">GPS OFF</span>
     </button>
   </div>
 </header>
-
 <nav>
   <button class="nav-btn active" onclick="goTab('nearby')" id="nt-nearby"><span class="ni">📍</span>Nearby</button>
   <button class="nav-btn" onclick="goTab('lists')" id="nt-lists"><span class="ni">📋</span>Lists</button>
@@ -286,98 +314,72 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
   <button class="nav-btn" onclick="goTab('find')" id="nt-find"><span class="ni">✨</span>Find</button>
   <button class="nav-btn" onclick="goTab('settings')" id="nt-settings"><span class="ni">⚙️</span>Settings</button>
 </nav>
-
 <div class="content">
 
-  <!-- NEARBY -->
-  <div class="panel active" id="panel-nearby">
-    <div id="nearby-content"></div>
-  </div>
+<!-- NEARBY -->
+<div class="panel active" id="panel-nearby"><div id="nearby-content"></div></div>
 
-  <!-- LISTS -->
-  <div class="panel" id="panel-lists">
-    <div class="sec-head">
-      <h2>Task Lists</h2>
-      <button class="btn-add" onclick="openListModal()">+ New List</button>
-    </div>
-    <div id="lists-content"></div>
-  </div>
-
-  <!-- PLACES -->
-  <div class="panel" id="panel-places">
-    <div class="sec-head">
-      <h2>Places</h2>
-      <button class="btn-add" onclick="openPlaceModal()">+ Add Place</button>
-    </div>
-    <div id="places-content"></div>
-  </div>
-
-  <!-- FIND -->
-  <div class="panel" id="panel-find">
-    <div class="ai-panel">
-      <h3><span>✨</span> AI Place Finder</h3>
-      <p>Pick a task list and AI will analyse your tasks — then suggest what kinds of places you'd need to visit to complete them.</p>
-      <div class="field">
-        <label>Analyse which list?</label>
-        <select id="ai-list-sel"><option value="">— choose a list —</option></select>
-      </div>
-      <button class="btn btn-prim" style="font-size:13px;padding:11px" onclick="runAI()">Analyse Tasks</button>
-      <div class="ai-loading" id="ai-loading"><div class="spinner"></div><span>Thinking…</span></div>
-      <div id="ai-results" style="display:flex;flex-direction:column;gap:8px"></div>
-    </div>
-    <div class="hint">💡 Suggestions aren't added automatically. Tap one to pre-fill the Add Place form, then search for or pin the exact location.</div>
-  </div>
-
-  <!-- SETTINGS -->
-  <div class="panel" id="panel-settings">
-    <div class="sec-head"><h2>Settings</h2></div>
-
-    <!-- Install card shown when not yet installed -->
-    <div class="install-card" id="installCard">
-      <h3>📲 Install ProxAlert</h3>
-      <p>Add to your home screen for the best experience — faster launch, full screen, works offline.</p>
-      <button class="btn btn-gold" onclick="promptInstall()">Install Now</button>
-      <div class="steps">
-        <div style="font-size:11px;color:var(--text3);font-family:'Geist Mono',monospace;margin-bottom:2px">OR MANUALLY IN CHROME:</div>
-        <div class="step"><div class="step-num">1</div><span>Tap the <strong>⋮</strong> menu in Chrome</span></div>
-        <div class="step"><div class="step-num">2</div><span>Tap <strong>"Add to Home Screen"</strong></span></div>
-        <div class="step"><div class="step-num">3</div><span>Tap <strong>Install</strong> to confirm</span></div>
-      </div>
-    </div>
-
-    <div class="radius-card">
-      <div class="field" style="gap:0">
-        <label>Alert Radius</label>
-        <div class="rv" id="radius-display">100m</div>
-      </div>
-      <input type="range" min="50" max="2000" step="50" value="100" id="radius-slider" oninput="setRadius(this.value)">
-      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);font-family:'Geist Mono',monospace;margin-top:4px">
-        <span>50m</span><span>1km</span><span>2km</span>
-      </div>
-    </div>
-
-    <div class="setting-card">
-      <div class="si"><h4>Vibration</h4><p>Buzz when entering a place</p></div>
-      <button class="toggle on" id="t-vibe" onclick="togglePref('vibe')"></button>
-    </div>
-    <div class="setting-card">
-      <div class="si"><h4>Visual Alert</h4><p>Full-screen popup on arrival</p></div>
-      <button class="toggle on" id="t-visual" onclick="togglePref('visual')"></button>
-    </div>
-    <div class="setting-card">
-      <div class="si"><h4>Only alert if tasks pending</h4><p>Skip if all tasks are done</p></div>
-      <button class="toggle on" id="t-skipdone" onclick="togglePref('skipdone')"></button>
-    </div>
-    <div class="setting-card">
-      <div class="si"><h4>Re-alert on re-entry</h4><p>Alert again after leaving &amp; returning</p></div>
-      <button class="toggle on" id="t-reentry" onclick="togglePref('reentry')"></button>
-    </div>
-
-    <div class="hint">📱 Keep ProxAlert open and screen on for reliable GPS. Android PWAs cannot track location in the background like native apps.</div>
-    <button class="btn btn-dest" onclick="if(confirm('Delete all data?'))clearAll()">🗑 Clear All Data</button>
-  </div>
-
+<!-- LISTS -->
+<div class="panel" id="panel-lists">
+  <div class="sec-head"><h2>Task Lists</h2><button class="btn-add" onclick="openListModal()">+ New List</button></div>
+  <div id="lists-content"></div>
 </div>
+
+<!-- PLACES -->
+<div class="panel" id="panel-places">
+  <div class="sec-head"><h2>Places</h2><button class="btn-add" onclick="openPlaceModal()">+ Add Place</button></div>
+  <div id="places-content"></div>
+</div>
+
+<!-- FIND -->
+<div class="panel" id="panel-find">
+  <div class="ai-panel">
+    <h3><span>✨</span> AI Place Finder</h3>
+    <p>Pick a task list and AI will analyse your tasks — then suggest what kinds of places to visit to complete them.</p>
+    <div class="field">
+      <label>Which list?</label>
+      <select id="ai-list-sel"><option value="">— choose a list —</option></select>
+    </div>
+    <button class="btn btn-prim" style="font-size:13px;padding:11px" onclick="runAI()">Analyse Tasks</button>
+    <div class="ai-loading" id="ai-loading"><div class="spinner"></div><span>Thinking…</span></div>
+    <div id="ai-results" style="display:flex;flex-direction:column;gap:8px"></div>
+  </div>
+  <div class="hint">💡 Suggestions aren't added automatically. Tap one to pre-fill the Add Place form.</div>
+</div>
+
+<!-- SETTINGS -->
+<div class="panel" id="panel-settings">
+  <div class="sec-head"><h2>Settings</h2></div>
+  <div class="install-card" id="installCard">
+    <h3>📲 Install ProxAlert</h3>
+    <p>Add to your home screen for the best experience.</p>
+    <button class="btn btn-gold" onclick="promptInstall()">Install Now</button>
+    <div class="steps">
+      <div style="font-size:11px;color:var(--text3);font-family:'Geist Mono',monospace;margin-bottom:2px">OR MANUALLY IN CHROME:</div>
+      <div class="step"><div class="step-num">1</div><span>Tap the <strong>⋮</strong> menu in Chrome</span></div>
+      <div class="step"><div class="step-num">2</div><span>Tap <strong>"Add to Home Screen"</strong></span></div>
+      <div class="step"><div class="step-num">3</div><span>Tap <strong>Install</strong> to confirm</span></div>
+    </div>
+  </div>
+  <div class="radius-card">
+    <div class="field" style="gap:0">
+      <label>Alert Radius</label>
+      <div class="rv" id="radius-display">100m</div>
+    </div>
+    <input type="range" min="5" max="2000" step="5" value="100" id="radius-slider" oninput="setRadius(this.value)">
+    <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);font-family:'Geist Mono',monospace;margin-top:4px">
+      <span>5m</span><span>250m</span><span>1km</span><span>2km</span>
+    </div>
+  </div>
+  <div class="setting-card"><div class="si"><h4>Vibration</h4><p>Buzz when entering a place</p></div><button class="toggle on" id="t-vibe" onclick="togglePref('vibe')"></button></div>
+  <div class="setting-card"><div class="si"><h4>Visual Alert</h4><p>Full-screen popup on arrival</p></div><button class="toggle on" id="t-visual" onclick="togglePref('visual')"></button></div>
+  <div class="setting-card"><div class="si"><h4>Only alert if tasks pending</h4><p>Skip if all tasks are done</p></div><button class="toggle on" id="t-skipdone" onclick="togglePref('skipdone')"></button></div>
+  <div class="setting-card"><div class="si"><h4>Re-alert on re-entry</h4><p>Alert again after leaving &amp; returning</p></div><button class="toggle on" id="t-reentry" onclick="togglePref('reentry')"></button></div>
+  <div class="hint">📱 Keep screen on for reliable GPS. Android PWAs cannot track location in the background.</div>
+  <button class="btn btn-dest" onclick="if(confirm('Delete all data?'))clearAll()">🗑 Clear All Data</button>
+</div>
+
+</div><!-- /content -->
 </div><!-- /app -->
 
 <!-- LIST MODAL -->
@@ -385,22 +387,21 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 <div class="sheet" onclick="event.stopPropagation()">
   <div class="sheet-handle"></div>
   <h2 id="list-modal-title">New Task List</h2>
-  <div class="field">
-    <label>List Name</label>
-    <input type="text" id="lm-name" placeholder="Weekly errands, Hospital trip…" maxlength="60">
-  </div>
+  <div class="field"><label>Name</label><input type="text" id="lm-name" placeholder="Weekly errands, Hospital trip…" maxlength="60"></div>
   <div class="row2">
     <div class="field"><label>Emoji</label><input type="text" id="lm-emoji" placeholder="📋" maxlength="4"></div>
-    <div class="field">
-      <label>Colour</label>
+    <div class="field"><label>Colour</label>
       <select id="lm-color">
-        <option value="green">🟢 Green</option>
-        <option value="blue">🔵 Blue</option>
-        <option value="amber">🟡 Amber</option>
-        <option value="pink">🩷 Pink</option>
+        <option value="green">🟢 Green</option><option value="blue">🔵 Blue</option>
+        <option value="amber">🟡 Amber</option><option value="pink">🩷 Pink</option>
         <option value="purple">🟣 Purple</option>
       </select>
     </div>
+  </div>
+  <div class="field">
+    <label>List Expires (auto-delete)</label>
+    <input type="datetime-local" id="lm-expires">
+    <div style="font-size:10px;color:var(--text3);font-family:'Geist Mono',monospace;margin-top:3px">List and all tasks deleted at this time</div>
   </div>
   <input type="hidden" id="lm-id">
   <button class="btn btn-prim" onclick="saveList()">Save List</button>
@@ -413,43 +414,45 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 <div class="sheet" onclick="event.stopPropagation()">
   <div class="sheet-handle"></div>
   <h2 id="place-modal-title">Add Place</h2>
-
-  <div class="field">
-    <label>Place Name</label>
-    <input type="text" id="pm-name" placeholder="Tesco, Post Office, Costa, Home…" maxlength="60">
-  </div>
+  <div class="field"><label>Place Name</label><input type="text" id="pm-name" placeholder="Tesco, Post Office, Costa, Home…" maxlength="60"></div>
   <div class="row2">
     <div class="field"><label>Emoji</label><input type="text" id="pm-emoji" placeholder="📍" maxlength="4"></div>
     <div class="field"><label>Category</label><input type="text" id="pm-type" placeholder="Supermarket" maxlength="40"></div>
   </div>
 
-  <!-- Address search -->
   <div class="field">
-    <label>Search by Address or Place Name</label>
-    <div class="addr-search-wrap">
-      <input type="text" id="addr-input" placeholder="e.g. Tesco Wallasey, or 12 High Street…"
-        onkeydown="if(event.key==='Enter'){event.preventDefault();searchAddress()}">
+    <label>Search by Address or Name</label>
+    <div class="addr-wrap">
+      <input type="text" id="addr-input" placeholder="e.g. Tesco Wallasey, 12 High Street…" onkeydown="if(event.key==='Enter'){event.preventDefault();searchAddress()}">
       <button class="addr-search-btn" onclick="searchAddress()">🔍</button>
     </div>
     <div class="addr-results" id="addr-results"></div>
-    <div class="coords-confirm" id="coords-confirm">
-      <span>📍</span>
-      <span id="coords-confirm-text"></span>
-      <button style="margin-left:auto;background:none;border:none;color:var(--text3);cursor:pointer;font-size:14px" onclick="clearCoords()">✕</button>
-    </div>
   </div>
 
-  <!-- Manual coords (collapsed by default) -->
-  <div>
-    <button class="btn btn-ghost btn-sm" onclick="toggleManualCoords()" id="manual-coords-btn" style="width:auto">
-      ⌨ Enter coordinates manually
-    </button>
-    <div id="manual-coords-area" style="display:none;margin-top:10px;display:flex;flex-direction:column;gap:10px">
-      <div class="row2">
-        <div class="field"><label>Latitude</label><input type="number" id="pm-lat" placeholder="53.4084" step="any"></div>
-        <div class="field"><label>Longitude</label><input type="number" id="pm-lng" placeholder="-2.9916" step="any"></div>
+  <div class="field">
+    <label>Position</label>
+    <div class="geo-box">
+      <div class="geo-row">
+        <span class="geo-label">Address</span>
+        <span class="geo-val" id="pm-addr-disp">Not set</span>
       </div>
-      <button class="btn btn-ghost btn-sm" onclick="fillCoords()">📍 Use My GPS Location</button>
+      <hr class="geo-divider">
+      <div class="geo-row">
+        <span class="geo-label">GPS Pin</span>
+        <span class="geo-val" id="pm-geo-disp">Same as address</span>
+        <button class="geo-update-btn" onclick="modalUpdateGeoPin()">📍 Pin Here</button>
+      </div>
+    </div>
+    <div style="font-size:10px;color:var(--text3);font-family:'Geist Mono',monospace;margin-top:4px">Proximity uses GPS Pin. Stand at the exact spot and tap "Pin Here" to set precisely (supports 5m radius).</div>
+  </div>
+
+  <div>
+    <button class="btn btn-ghost btn-sm btn-auto" onclick="toggleManualCoords()" id="manual-coords-btn">⌨ Manual coordinates</button>
+    <div id="manual-coords-area" style="display:none;margin-top:10px;flex-direction:column;gap:10px">
+      <div class="row2">
+        <div class="field"><label>Latitude</label><input type="number" id="pm-lat" placeholder="53.4084" step="any" oninput="onManualCoordChange()"></div>
+        <div class="field"><label>Longitude</label><input type="number" id="pm-lng" placeholder="-2.9916" step="any" oninput="onManualCoordChange()"></div>
+      </div>
     </div>
   </div>
 
@@ -458,9 +461,21 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
     <div id="pm-list-links" style="display:flex;flex-direction:column;gap:8px"></div>
   </div>
 
+  <div class="field">
+    <label>Alert Rules <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text3)">(optional)</span></label>
+    <div id="pm-rules" style="display:flex;flex-direction:column;gap:8px"></div>
+    <button class="btn btn-ghost btn-sm btn-auto" style="margin-top:6px" onclick="addRuleToModal()">＋ Add Rule</button>
+    <div class="hint" style="margin-top:6px">No rules = always alert. Rules restrict to specific times/days/dates.</div>
+  </div>
+
+  <div class="field">
+    <label>Place Expires (auto-delete)</label>
+    <input type="datetime-local" id="pm-expires">
+  </div>
+
   <input type="hidden" id="pm-id">
-  <input type="hidden" id="pm-lat-hidden">
-  <input type="hidden" id="pm-lng-hidden">
+  <input type="hidden" id="pm-addr-lat"><input type="hidden" id="pm-addr-lng">
+  <input type="hidden" id="pm-geo-lat"><input type="hidden" id="pm-geo-lng">
   <button class="btn btn-prim" onclick="savePlace()">Save Place</button>
   <button class="btn btn-ghost" onclick="closeOverlay('place-overlay')">Cancel</button>
 </div>
@@ -476,208 +491,234 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
   <button class="btn btn-prim" onclick="closeAlert()">Got it</button>
 </div>
 </div>
-
 <div class="toast" id="toast"></div>
 
 <script>
-// ═══════════════════════════════════════════
-// SERVICE WORKER REGISTRATION
-// ═══════════════════════════════════════════
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js').catch(e => console.warn('SW:', e));
-}
+// ── Service Worker ──
+if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});
 
-// ═══════════════════════════════════════════
-// PWA INSTALL PROMPT
-// ═══════════════════════════════════════════
-let _deferredPrompt = null;
-
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault();
-  _deferredPrompt = e;
+// ── PWA Install ──
+let _deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();_deferredPrompt=e;
   document.getElementById('installBtn').classList.add('visible');
   document.getElementById('installCard').classList.add('show');
 });
-
-window.addEventListener('appinstalled', () => {
-  _deferredPrompt = null;
+window.addEventListener('appinstalled',()=>{
+  _deferredPrompt=null;
   document.getElementById('installBtn').classList.remove('visible');
   document.getElementById('installCard').classList.remove('show');
   toast('✓ ProxAlert installed!');
 });
-
-function promptInstall() {
-  if (_deferredPrompt) {
-    _deferredPrompt.prompt();
-    _deferredPrompt.userChoice.then(r => {
-      if (r.outcome === 'accepted') toast('Installing…');
-      _deferredPrompt = null;
-    });
-  } else {
-    // Show manual instructions
-    goTab('settings');
-    document.getElementById('installCard').classList.add('show');
-    toast('Follow the steps below to install');
-  }
+function promptInstall(){
+  if(_deferredPrompt){_deferredPrompt.prompt();_deferredPrompt.userChoice.then(()=>{_deferredPrompt=null;});}
+  else{goTab('settings');document.getElementById('installCard').classList.add('show');toast('Follow steps below to install');}
 }
-
-// Hide install card if already running as standalone
-if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+if(window.matchMedia('(display-mode: standalone)').matches||navigator.standalone){
   document.getElementById('installCard').classList.remove('show');
   document.getElementById('installBtn').classList.remove('visible');
 }
 
-// ═══════════════════════════════════════════
-// CONSTANTS
-// ═══════════════════════════════════════════
-const TASK_TYPES = [
-  {id:'buy',    label:'Buy',     emoji:'🛒'},
-  {id:'collect',label:'Collect', emoji:'📦'},
-  {id:'do',     label:'Do',      emoji:'✅'},
-  {id:'charge', label:'Charge',  emoji:'🔋'},
-  {id:'return', label:'Return',  emoji:'↩️'},
-  {id:'drop',   label:'Drop off',emoji:'🗃️'},
-  {id:'remind', label:'Remind',  emoji:'💬'},
-  {id:'other',  label:'Other',   emoji:'•' },
+// ── Constants ──
+const TASK_TYPES=[
+  {id:'buy',label:'Buy',emoji:'🛒'},{id:'collect',label:'Collect',emoji:'📦'},
+  {id:'do',label:'Do',emoji:'✅'},{id:'charge',label:'Charge',emoji:'🔋'},
+  {id:'return',label:'Return',emoji:'↩️'},{id:'drop',label:'Drop off',emoji:'🗃️'},
+  {id:'remind',label:'Remind',emoji:'💬'},{id:'other',label:'Other',emoji:'•'},
 ];
-
-const LIST_COLORS = {
-  green:  {badge:'rgba(74,222,128,.15)',  text:'#4ade80'},
-  blue:   {badge:'rgba(96,165,250,.15)',  text:'#60a5fa'},
-  amber:  {badge:'rgba(250,204,21,.15)',  text:'#facc15'},
-  pink:   {badge:'rgba(244,114,182,.15)', text:'#f472b6'},
-  purple: {badge:'rgba(167,139,250,.15)', text:'#a78bfa'},
+const LIST_COLORS={
+  green:{badge:'rgba(74,222,128,.15)',text:'#4ade80'},
+  blue:{badge:'rgba(96,165,250,.15)',text:'#60a5fa'},
+  amber:{badge:'rgba(250,204,21,.15)',text:'#facc15'},
+  pink:{badge:'rgba(244,114,182,.15)',text:'#f472b6'},
+  purple:{badge:'rgba(167,139,250,.15)',text:'#a78bfa'},
 };
+const DAY_SHORT=['Su','Mo','Tu','We','Th','Fr','Sa'];
+const DAY_FULL=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
-// ═══════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════
-let db    = loadDB();
-let prefs = loadPrefs();
-let gpsId = null, curPos = null;
-let alertedPlaces = new Set();
-let curTab = 'nearby';
-let manualCoordsOpen = false;
+// ── State ──
+let db=loadDB(), prefs=loadPrefs();
+let gpsId=null, curPos=null, alertedPlaces=new Set(), curTab='nearby';
+let _modalRules=[], manualOpen=false;
+let _selType={};
 
-function loadDB() {
-  try { return JSON.parse(localStorage.getItem('proxalert_v3')||'null') || {lists:[],places:[]}; }
-  catch { return {lists:[],places:[]}; }
-}
-function saveDB() { localStorage.setItem('proxalert_v3', JSON.stringify(db)); }
-function loadPrefs() {
-  const d = {radius:100,vibe:true,visual:true,skipdone:true,reentry:true};
-  try { return {...d,...JSON.parse(localStorage.getItem('proxalert_v3_prefs')||'{}')}; }
-  catch { return d; }
-}
-function savePrefs() { localStorage.setItem('proxalert_v3_prefs', JSON.stringify(prefs)); }
-function uid() { return Date.now().toString(36)+Math.random().toString(36).slice(2,5); }
+function loadDB(){try{return JSON.parse(localStorage.getItem('proxalert_v4')||'null')||{lists:[],places:[]};}catch{return{lists:[],places:[]};}}
+function saveDB(){localStorage.setItem('proxalert_v4',JSON.stringify(db));}
+function loadPrefs(){const d={radius:100,vibe:true,visual:true,skipdone:true,reentry:true};try{return{...d,...JSON.parse(localStorage.getItem('proxalert_v4_prefs')||'{}')};}catch{return d;}}
+function savePrefs(){localStorage.setItem('proxalert_v4_prefs',JSON.stringify(prefs));}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,5);}
 
-// ═══════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════
-applyPrefs();
-renderAll();
+// Migrate from old DB key if present
+(function migrate(){
+  try{
+    const old=localStorage.getItem('proxalert_v3');
+    if(old && !localStorage.getItem('proxalert_v4')){
+      localStorage.setItem('proxalert_v4',old);
+      db=loadDB();
+    }
+  }catch{}
+})();
 
-function renderAll() { renderNearby(); renderLists(); renderPlaces(); populateAISel(); }
+// ── Init ──
+applyPrefs(); pruneExpired(); renderAll();
+setInterval(pruneExpired, 60000); // check expiry every minute
 
-// ═══════════════════════════════════════════
-// TAB
-// ═══════════════════════════════════════════
-function goTab(tab) {
-  curTab = tab;
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('nt-'+tab).classList.add('active');
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('panel-'+tab).classList.add('active');
-  if(tab==='nearby') renderNearby();
-  if(tab==='lists')  renderLists();
-  if(tab==='places') renderPlaces();
-  if(tab==='find')   populateAISel();
+// ── Tab ──
+function goTab(t){
+  curTab=t;
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('nt-'+t).classList.add('active');
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+t).classList.add('active');
+  if(t==='nearby')renderNearby();
+  if(t==='lists')renderLists();
+  if(t==='places')renderPlaces();
+  if(t==='find')populateAISel();
 }
 
-// ═══════════════════════════════════════════
-// GPS
-// ═══════════════════════════════════════════
-function toggleGPS() { gpsId!==null ? stopGPS() : startGPS(); }
-
-function startGPS() {
-  if (!navigator.geolocation) { toast('GPS not available'); return; }
+// ── GPS ──
+function toggleGPS(){gpsId!==null?stopGPS():startGPS();}
+function startGPS(){
+  if(!navigator.geolocation){toast('GPS not available');return;}
   setGPSUI('acquiring');
-  gpsId = navigator.geolocation.watchPosition(
-    pos => {
-      curPos = pos; setGPSUI('live');
-      checkProximity();
-      if(curTab==='nearby') renderNearby();
-      if(curTab==='places') renderPlaces();
-    },
-    err => { setGPSUI('err'); toast('GPS: '+err.message); },
-    {enableHighAccuracy:true, maximumAge:5000, timeout:15000}
-  );
+  gpsId=navigator.geolocation.watchPosition(pos=>{
+    curPos=pos;setGPSUI('live');
+    checkProximity();
+    if(curTab==='nearby')renderNearby();
+    if(curTab==='places')renderPlaces();
+  },err=>{setGPSUI('err');toast('GPS: '+err.message);},{enableHighAccuracy:true,maximumAge:5000,timeout:15000});
 }
-
-function stopGPS() {
+function stopGPS(){
   if(gpsId!==null){navigator.geolocation.clearWatch(gpsId);gpsId=null;}
-  curPos=null; alertedPlaces.clear(); setGPSUI('off'); renderAll();
+  curPos=null;alertedPlaces.clear();setGPSUI('off');renderAll();
 }
-
-function setGPSUI(s) {
+function setGPSUI(s){
   const m={off:['','GPS OFF'],acquiring:['','ACQUIRING…'],live:['live','GPS LIVE'],err:['err','GPS ERR']};
   document.getElementById('gpsBtn').className='gps-btn '+(m[s][0]);
   document.getElementById('gpsLabel').textContent=m[s][1];
 }
 
-// ═══════════════════════════════════════════
-// GEO UTILS
-// ═══════════════════════════════════════════
-function haversine(la1,lo1,la2,lo2) {
+// ── Geo utils ──
+function haversine(la1,lo1,la2,lo2){
   const R=6371000,dL=(la2-la1)*Math.PI/180,dG=(lo2-lo1)*Math.PI/180;
   const a=Math.sin(dL/2)**2+Math.cos(la1*Math.PI/180)*Math.cos(la2*Math.PI/180)*Math.sin(dG/2)**2;
   return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
 }
-function distTo(p) { return curPos ? haversine(curPos.coords.latitude,curPos.coords.longitude,p.lat,p.lng) : null; }
-function fmtDist(m) { if(m===null||m===undefined)return'—'; return m<1000?Math.round(m)+'m':(m/1000).toFixed(1)+'km'; }
-function distBadge(d) { if(d===null)return'badge-far'; if(d<=prefs.radius)return'badge-near'; if(d<=prefs.radius*5)return'badge-mid'; return'badge-far'; }
+function distTo(p){
+  if(!curPos)return null;
+  // Use precise GPS pin if available, else address coords
+  const lat=p.geoLat??p.lat, lng=p.geoLng??p.lng;
+  if(lat==null||lng==null)return null;
+  return haversine(curPos.coords.latitude,curPos.coords.longitude,lat,lng);
+}
+function fmtDist(m){if(m===null||m===undefined)return'—';return m<1000?Math.round(m)+'m':(m/1000).toFixed(1)+'km';}
+function distBadge(d){if(d===null)return'badge-far';if(d<=prefs.radius)return'badge-near';if(d<=prefs.radius*5)return'badge-mid';return'badge-far';}
 
-// ═══════════════════════════════════════════
-// PROXIMITY
-// ═══════════════════════════════════════════
-function checkProximity() {
-  if(!curPos) return;
-  db.places.forEach(place => {
-    const d=distTo(place), near=d!==null&&d<=prefs.radius;
-    if(near && !alertedPlaces.has(place.id)) {
-      const lists=db.lists.filter(l=>(place.listIds||[]).includes(l.id));
-      const pending=lists.flatMap(l=>(l.tasks||[]).filter(t=>!t.done));
-      if(!prefs.skipdone||pending.length>0) {
-        alertedPlaces.add(place.id);
-        triggerAlert(place,lists,pending,d);
+// ── Expiry ──
+function pruneExpired(){
+  const now=Date.now();
+  let changed=false;
+  db.lists=db.lists.filter(l=>{
+    if(l.expiresAt && new Date(l.expiresAt).getTime()<=now){
+      // remove from places too
+      db.places.forEach(p=>{if(p.listIds)p.listIds=p.listIds.filter(id=>id!==l.id);});
+      changed=true;return false;
+    }
+    // prune expired tasks within list
+    const before=(l.tasks||[]).length;
+    l.tasks=(l.tasks||[]).filter(t=>!t.expiresAt||new Date(t.expiresAt).getTime()>now);
+    if(l.tasks.length!==before)changed=true;
+    return true;
+  });
+  db.places=db.places.filter(p=>{
+    if(p.expiresAt && new Date(p.expiresAt).getTime()<=now){changed=true;return false;}
+    return true;
+  });
+  if(changed){saveDB();renderAll();}
+}
+
+function fmtExpiry(iso){
+  if(!iso)return null;
+  const diff=new Date(iso).getTime()-Date.now();
+  if(diff<=0)return{label:'Expired',soon:true};
+  const h=Math.floor(diff/3600000),m=Math.floor((diff%3600000)/60000),d=Math.floor(diff/86400000);
+  if(d>1)return{label:`Expires ${d}d`,soon:d<2};
+  if(h>0)return{label:`Expires ${h}h ${m}m`,soon:h<6};
+  return{label:`Expires ${m}m`,soon:true};
+}
+
+// ── Rules ──
+function ruleMatchesNow(rule){
+  const now=new Date();
+  const hhmm=now.getHours()*60+now.getMinutes();
+  const dayIdx=now.getDay();
+  const todayIso=now.toISOString().slice(0,10);
+  if(rule.timeFrom&&rule.timeTo){
+    const[fh,fm]=rule.timeFrom.split(':').map(Number);
+    const[th,tm]=rule.timeTo.split(':').map(Number);
+    const from=fh*60+fm,to=th*60+tm;
+    if(to>=from){if(hhmm<from||hhmm>to)return false;}
+    else{if(hhmm<from&&hhmm>to)return false;}
+  }
+  const hasDays=rule.days&&rule.days.length>0;
+  const hasDates=rule.dates&&rule.dates.length>0;
+  if(hasDates&&rule.dates.includes(todayIso))return true;
+  if(hasDays&&!rule.days.includes(dayIdx))return false;
+  if(!hasDays&&hasDates&&!rule.dates.includes(todayIso))return false;
+  return true;
+}
+
+// ── Proximity ──
+function checkProximity(){
+  if(!curPos)return;
+  db.places.forEach(place=>{
+    const d=distTo(place),near=d!==null&&d<=prefs.radius;
+    if(near&&!alertedPlaces.has(place.id)){
+      const rules=place.rules||[];
+      let listsToShow,matchedRule;
+      if(rules.length===0){
+        listsToShow=db.lists.filter(l=>(place.listIds||[]).includes(l.id));
+        matchedRule=null;
+      } else {
+        matchedRule=rules.find(r=>ruleMatchesNow(r));
+        if(!matchedRule)return;
+        const ruleListIds=matchedRule.listIds&&matchedRule.listIds.length>0?matchedRule.listIds:(place.listIds||[]);
+        listsToShow=db.lists.filter(l=>ruleListIds.includes(l.id));
       }
-    } else if(!near && prefs.reentry && alertedPlaces.has(place.id)) {
+      // Also include place's own direct tasks (quickTasks)
+      const quickList=getOrCreateQuickList(place.id,false);
+      if(quickList)listsToShow=[...listsToShow.filter(l=>l.id!==quickList.id),quickList];
+      const pending=listsToShow.flatMap(l=>(l.tasks||[]).filter(t=>!t.done));
+      if(!prefs.skipdone||pending.length>0){
+        alertedPlaces.add(place.id);
+        triggerAlert(place,listsToShow,pending,d,matchedRule);
+      }
+    } else if(!near&&prefs.reentry&&alertedPlaces.has(place.id)){
       alertedPlaces.delete(place.id);
     }
   });
 }
 
-function triggerAlert(place,lists,tasks,dist) {
-  if(prefs.vibe && navigator.vibrate) navigator.vibrate([200,80,200,80,400]);
-  if(prefs.visual) {
+function triggerAlert(place,lists,tasks,dist,rule){
+  if(prefs.vibe&&navigator.vibrate)navigator.vibrate([200,80,200,80,400]);
+  if(prefs.visual){
     document.getElementById('al-ico').textContent=place.emoji||'📍';
     document.getElementById('al-name').textContent=place.name;
-    document.getElementById('al-loc').textContent=(place.type?place.type+' · ':'')+fmtDist(dist)+' away';
+    const ruleLine=rule?.label?` · 🕐 ${rule.label}`:'';
+    document.getElementById('al-loc').textContent=(place.type?place.type+' · ':'')+fmtDist(dist)+' away'+ruleLine;
     let html='';
-    if(!tasks.length) {
+    if(!tasks.length){
       html='<div style="font-size:12px;color:var(--text3);text-align:center;padding:8px 0">All tasks done ✓</div>';
     } else {
-      lists.forEach(list => {
-        const lt=(list.tasks||[]).filter(t=>!t.done);
-        if(!lt.length) return;
+      lists.forEach(list=>{
+        const lt=(list.tasks||[]).filter(t=>!t.done);if(!lt.length)return;
         const col=LIST_COLORS[list.color||'green']||LIST_COLORS.green;
         html+=`<div class="at-head" style="color:${col.text}">${list.emoji||'📋'} ${esc(list.name)}</div>`;
-        lt.slice(0,6).forEach(t => {
+        lt.slice(0,6).forEach(t=>{
           const ty=TASK_TYPES.find(x=>x.id===t.type)||TASK_TYPES[7];
           html+=`<div class="alert-task-row"><span class="at-type task-type-pill t-${t.type||'other'}">${ty.emoji} ${ty.label}</span><span style="flex:1">${esc(t.name)}${t.note?`<span style="color:var(--text3)"> — ${esc(t.note)}</span>`:''}</span></div>`;
         });
-        if(lt.length>6) html+=`<div style="font-size:11px;color:var(--text3);margin-top:4px">+${lt.length-6} more</div>`;
+        if(lt.length>6)html+=`<div style="font-size:11px;color:var(--text3);margin-top:4px">+${lt.length-6} more</div>`;
       });
     }
     document.getElementById('al-tasks').innerHTML=html;
@@ -686,156 +727,47 @@ function triggerAlert(place,lists,tasks,dist) {
     toast(`${place.emoji||'📍'} ${place.name} — ${tasks.length} task${tasks.length!==1?'s':''}`);
   }
 }
-function closeAlert() { document.getElementById('alert-overlay').classList.remove('show'); }
+function closeAlert(){document.getElementById('alert-overlay').classList.remove('show');}
 
-// ═══════════════════════════════════════════
-// ADDRESS SEARCH (OpenStreetMap Nominatim)
-// ═══════════════════════════════════════════
-let _addrTimer = null;
-let _pickedLat = null, _pickedLng = null;
-
-document.getElementById('addr-input').addEventListener('input', () => {
-  clearTimeout(_addrTimer);
-  const v = document.getElementById('addr-input').value.trim();
-  if (v.length < 3) { hideAddrResults(); return; }
-  _addrTimer = setTimeout(() => searchAddress(), 600);
-});
-
-async function searchAddress() {
-  const q = document.getElementById('addr-input').value.trim();
-  if (!q || q.length < 2) return;
-
-  const resultsEl = document.getElementById('addr-results');
-  resultsEl.className = 'addr-results show';
-  resultsEl.innerHTML = '<div class="addr-loading"><div class="spinner"></div> Searching…</div>';
-
-  try {
-    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}&limit=6&addressdetails=1`;
-    const res = await fetch(url, {headers:{'Accept-Language':'en'}});
-    const data = await res.json();
-
-    if (!data.length) {
-      resultsEl.innerHTML = '<div class="addr-no-results">No results found. Try a different search.</div>';
-      return;
-    }
-
-    resultsEl.innerHTML = data.map((r, i) => {
-      const name = r.namedetails?.name || r.display_name.split(',')[0];
-      const addr = r.display_name;
-      const icon = getOSMIcon(r.type, r.class);
-      return `<div class="addr-result-item" onclick="pickAddress(${i})">
-        <span class="ar-icon">${icon}</span>
-        <div class="ar-text">
-          <div class="ar-name">${esc(name)}</div>
-          <div class="ar-addr">${esc(addr)}</div>
-        </div>
-      </div>`;
-    }).join('');
-
-    // Store results for picking
-    window._addrResults = data;
-  } catch(e) {
-    resultsEl.innerHTML = '<div class="addr-no-results">Search failed. Check your connection.</div>';
+// ── Quick tasks per place ──
+// Each place has an auto-managed list called "📍 PlaceName"
+function getOrCreateQuickList(placeId,create=true){
+  const key='_quick_'+placeId;
+  let list=db.lists.find(l=>l._quickFor===placeId);
+  if(!list&&create){
+    const place=db.places.find(p=>p.id===placeId);
+    list={id:uid(),name:(place?place.name:'Place')+' tasks',emoji:'📌',color:'blue',tasks:[],_quickFor:placeId};
+    db.lists.push(list);
+    // Auto-link to place
+    if(place){if(!place.listIds)place.listIds=[];if(!place.listIds.includes(list.id))place.listIds.push(list.id);}
+    saveDB();
   }
+  return list||null;
 }
 
-function getOSMIcon(type, cls) {
-  const map = {
-    supermarket:'🛒', convenience:'🛒', grocery:'🛒',
-    pharmacy:'💊', hospital:'🏥', doctors:'🏥', clinic:'🏥',
-    restaurant:'🍽️', cafe:'☕', fast_food:'🍔', bar:'🍺', pub:'🍺',
-    library:'📚', school:'🏫', university:'🎓', college:'🎓',
-    fuel:'⛽', parking:'🅿️',
-    post_office:'📮', bank:'🏦', atm:'🏧',
-    station:'🚉', bus_station:'🚌', bus_stop:'🚌', subway:'🚇', tram_stop:'🚊', ferry_terminal:'⛴️',
-    airport:'✈️', hotel:'🏨', hostel:'🏨',
-    park:'🌳', garden:'🌿', playground:'🛝',
-    gym:'💪', sports_centre:'🏟️', swimming_pool:'🏊',
-    cinema:'🎬', theatre:'🎭', museum:'🏛️', gallery:'🎨',
-    place_of_worship:'🛕', church:'⛪', mosque:'🕌',
-    charging_station:'🔌',
-    townhall:'🏛️', police:'🚓', fire_station:'🚒',
-    residential:'🏘️', house:'🏠', apartments:'🏢',
-    office:'🏢', commercial:'🏬',
-  };
-  return map[type] || (cls==='highway'?'🛣️':cls==='waterway'?'💧':'📍');
+function addQuickTask(placeId){
+  const inp=document.getElementById('pq-input-'+placeId);
+  const sel=document.getElementById('pq-type-'+placeId);
+  const expInp=document.getElementById('pq-exp-'+placeId);
+  if(!inp)return;
+  const name=inp.value.trim();if(!name)return;
+  const list=getOrCreateQuickList(placeId);
+  if(!list)return;
+  const expiresAt=expInp&&expInp.value?new Date(expInp.value).toISOString():'';
+  list.tasks.push({id:uid(),name,type:sel?sel.value:'other',note:'',done:false,expiresAt});
+  inp.value='';if(expInp)expInp.value='';
+  saveDB();renderPlaces();
+  setTimeout(()=>document.getElementById('pc-'+placeId+'-body')?.classList.remove('hidden'),10);
+  toast('Task added');
 }
 
-function pickAddress(idx) {
-  const r = window._addrResults?.[idx];
-  if (!r) return;
+// ── Render: Nearby ──
+function renderAll(){renderNearby();renderLists();renderPlaces();populateAISel();}
 
-  _pickedLat = parseFloat(r.lat);
-  _pickedLng = parseFloat(r.lon);
-
-  // Fill hidden coord fields
-  document.getElementById('pm-lat-hidden').value = _pickedLat;
-  document.getElementById('pm-lng-hidden').value = _pickedLng;
-
-  // Also fill manual fields if open
-  document.getElementById('pm-lat').value = _pickedLat.toFixed(6);
-  document.getElementById('pm-lng').value = _pickedLng.toFixed(6);
-
-  // Auto-fill name if empty
-  const nameEl = document.getElementById('pm-name');
-  if (!nameEl.value.trim()) {
-    nameEl.value = r.namedetails?.name || r.display_name.split(',')[0];
-  }
-
-  // Show confirmation
-  const confirmEl = document.getElementById('coords-confirm');
-  document.getElementById('coords-confirm-text').textContent =
-    `${_pickedLat.toFixed(5)}, ${_pickedLng.toFixed(5)} — ${r.display_name.split(',').slice(0,2).join(',')}`;
-  confirmEl.classList.add('show');
-
-  // Clear search
-  document.getElementById('addr-input').value = r.display_name.split(',')[0];
-  hideAddrResults();
-}
-
-function hideAddrResults() {
-  document.getElementById('addr-results').className = 'addr-results';
-}
-
-function clearCoords() {
-  _pickedLat = null; _pickedLng = null;
-  document.getElementById('pm-lat-hidden').value = '';
-  document.getElementById('pm-lng-hidden').value = '';
-  document.getElementById('pm-lat').value = '';
-  document.getElementById('pm-lng').value = '';
-  document.getElementById('coords-confirm').classList.remove('show');
-  document.getElementById('addr-input').value = '';
-}
-
-function toggleManualCoords() {
-  manualCoordsOpen = !manualCoordsOpen;
-  const area = document.getElementById('manual-coords-area');
-  const btn  = document.getElementById('manual-coords-btn');
-  area.style.display = manualCoordsOpen ? 'flex' : 'none';
-  btn.textContent = manualCoordsOpen ? '▲ Hide manual coordinates' : '⌨ Enter coordinates manually';
-}
-
-function fillCoords() {
-  if (!curPos) { toast('Start GPS first'); return; }
-  _pickedLat = curPos.coords.latitude;
-  _pickedLng = curPos.coords.longitude;
-  document.getElementById('pm-lat').value = _pickedLat.toFixed(6);
-  document.getElementById('pm-lng').value = _pickedLng.toFixed(6);
-  document.getElementById('pm-lat-hidden').value = _pickedLat;
-  document.getElementById('pm-lng-hidden').value = _pickedLng;
-  const confirmEl = document.getElementById('coords-confirm');
-  document.getElementById('coords-confirm-text').textContent = `${_pickedLat.toFixed(5)}, ${_pickedLng.toFixed(5)} — GPS position`;
-  confirmEl.classList.add('show');
-  toast('📍 Location set to GPS position');
-}
-
-// ═══════════════════════════════════════════
-// RENDER: NEARBY
-// ═══════════════════════════════════════════
-function renderNearby() {
-  const el = document.getElementById('nearby-content');
-  if (!curPos) {
-    el.innerHTML=`<div class="empty"><div class="ei">📡</div><p>Tap <strong>GPS OFF</strong> at the top to start tracking.<br><br>When you're near a saved place with pending tasks, you'll be alerted automatically.</p></div>`;
+function renderNearby(){
+  const el=document.getElementById('nearby-content');
+  if(!curPos){
+    el.innerHTML=`<div class="empty"><div class="ei">📡</div><p>Tap <strong>GPS OFF</strong> to start tracking.<br><br>When near a saved place with pending tasks, you'll be alerted.</p></div>`;
     return;
   }
   const sorted=[...db.places].map(p=>({...p,_d:distTo(p)})).sort((a,b)=>(a._d??1e9)-(b._d??1e9));
@@ -849,51 +781,56 @@ function renderNearby() {
     html+=`<div class="nearby-card"><div class="nc-ico">${place.emoji||'📍'}</div><div class="nc-body"><h3>${esc(place.name)}</h3><div class="nc-sub">${fmtDist(place._d)} away · ${tasks.length} task${tasks.length!==1?'s':''} pending</div>${tasks.length?`<div class="task-chips">${chips}${tasks.length>6?`<span class="tc-chip" style="color:var(--text3)">+${tasks.length-6} more</span>`:''}</div>`:'<div style="font-size:11px;color:var(--text3)">All done ✓</div>'}</div></div>`;
   });
   if(far.length){
-    if(near.length) html+=`<div style="font-size:10px;font-family:'Geist Mono',monospace;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin:4px 2px">Other Places</div>`;
+    if(near.length)html+=`<div style="font-size:10px;font-family:'Geist Mono',monospace;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin:4px 2px 6px">Other Places</div>`;
     far.forEach(place=>{
       const lists=db.lists.filter(l=>(place.listIds||[]).includes(l.id));
       const pending=lists.reduce((a,l)=>a+(l.tasks||[]).filter(t=>!t.done).length,0);
-      html+=`<div class="card" style="margin-bottom:2px"><div class="card-head" style="cursor:default"><div class="card-ico">${place.emoji||'📍'}</div><div class="card-info"><h3>${esc(place.name)}</h3><p>${place.type||'Place'} · ${lists.length} list${lists.length!==1?'s':''} · ${pending} pending</p></div><span class="badge ${distBadge(place._d)}">${fmtDist(place._d)}</span></div></div>`;
+      html+=`<div class="card" style="margin-bottom:4px"><div class="card-head" style="cursor:default"><div class="card-ico">${place.emoji||'📍'}</div><div class="card-info"><h3>${esc(place.name)}</h3><p>${place.type||'Place'} · ${pending} pending</p></div><span class="badge ${distBadge(place._d)}">${fmtDist(place._d)}</span></div></div>`;
     });
   }
-  if(!db.places.length) html=`<div class="empty"><div class="ei">🗺️</div><p>No places saved yet.<br>Add them in the <strong>Places</strong> tab.</p></div>`;
+  if(!db.places.length)html=`<div class="empty"><div class="ei">🗺️</div><p>No places saved yet.<br>Add them in the <strong>Places</strong> tab.</p></div>`;
   el.innerHTML=html;
 }
 
-// ═══════════════════════════════════════════
-// RENDER: LISTS
-// ═══════════════════════════════════════════
-function renderLists() {
+// ── Render: Lists ──
+function renderLists(){
   const el=document.getElementById('lists-content');
-  if(!db.lists.length){el.innerHTML=`<div class="empty"><div class="ei">📋</div><p>No task lists yet.</p></div>`;return;}
-  el.innerHTML=db.lists.map(list=>listCard(list)).join('');
+  if(!db.lists.filter(l=>!l._quickFor).length){el.innerHTML=`<div class="empty"><div class="ei">📋</div><p>No task lists yet.</p></div>`;return;}
+  el.innerHTML=db.lists.filter(l=>!l._quickFor).map(list=>listCard(list)).join('');
 }
 
-function listCard(list) {
-  const tasks=list.tasks||[], done=tasks.filter(t=>t.done).length, total=tasks.length;
+function listCard(list){
+  const tasks=list.tasks||[],done=tasks.filter(t=>t.done).length,total=tasks.length;
   const pct=total?Math.round(done/total*100):0;
   const col=LIST_COLORS[list.color||'green']||LIST_COLORS.green;
-  const linked=db.places.filter(p=>(p.listIds||[]).includes(list.id));
+  const linked=db.places.filter(p=>(p.listIds||[]).includes(list.id)&&!p._quickFor);
+  const expInfo=fmtExpiry(list.expiresAt);
   const taskRows=tasks.map(task=>{
     const ty=TASK_TYPES.find(x=>x.id===task.type)||TASK_TYPES[7];
-    return `<div class="task-item"><button class="task-check ${task.done?'done':''}" onclick="toggleTask('${list.id}','${task.id}')">✓</button><div class="task-body"><div class="task-name ${task.done?'done':''}">${esc(task.name)}</div><div class="task-meta"><span class="task-type-pill t-${task.type||'other'}">${ty.emoji} ${ty.label}</span>${task.note?`<span class="task-note">${esc(task.note)}</span>`:''}</div></div><button class="task-del" onclick="deleteTask('${list.id}','${task.id}')">✕</button></div>`;
+    const tExp=fmtExpiry(task.expiresAt);
+    return `<div class="task-item"><button class="task-check ${task.done?'done':''}" onclick="toggleTask('${list.id}','${task.id}')">✓</button><div class="task-body"><div class="task-name ${task.done?'done':''}">${esc(task.name)}</div><div class="task-meta"><span class="task-type-pill t-${task.type||'other'}">${ty.emoji} ${ty.label}</span>${task.note?`<span class="task-note">${esc(task.note)}</span>`:''} ${tExp?`<span class="exp-badge ${tExp.soon?'soon':''}">${tExp.label}</span>`:''}</div></div><button class="task-del" onclick="deleteTask('${list.id}','${task.id}')">✕</button></div>`;
   }).join('');
-  const typeChips=TASK_TYPES.map(ty=>`<button class="type-chip t-${ty.id}" id="tc-${list.id}-${ty.id}" onclick="selectType('${list.id}','${ty.id}')">${ty.emoji} ${ty.label}</button>`).join('');
+  const typeChips=TASK_TYPES.map(ty=>`<button class="type-chip t-${ty.id}" id="tc-${list.id}-${ty.id}" onclick="selType('${list.id}','${ty.id}')">${ty.emoji} ${ty.label}</button>`).join('');
   return `<div class="card" id="lc-${list.id}">
     <div class="card-head" onclick="toggleBody('lc-${list.id}')">
       <div class="card-ico" style="font-size:20px">${list.emoji||'📋'}</div>
       <div class="card-info"><h3 style="color:${col.text}">${esc(list.name)}</h3><p>${done}/${total} done · ${linked.length} place${linked.length!==1?'s':''}</p></div>
+      ${expInfo?`<span class="exp-badge ${expInfo.soon?'soon':''}" style="margin-right:4px">${expInfo.label}</span>`:''}
       <span class="badge" style="background:${col.badge};color:${col.text}">${total-done} left</span>
     </div>
     ${total?`<div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:${col.text}"></div></div>`:''}
     <div class="card-body hidden" id="lc-${list.id}-body">
       ${taskRows}
       <div class="add-task-area">
-        <div class="add-task-row1">
+        <div class="add-task-r1">
           <input type="text" placeholder="Add task…" id="ti-${list.id}" maxlength="100" onkeydown="if(event.key==='Enter')addTask('${list.id}')">
           <button class="icon-btn" onclick="addTask('${list.id}')">+</button>
         </div>
-        <div class="add-task-row2">${typeChips}<input type="text" class="task-note-in" placeholder="note…" id="tn-${list.id}" maxlength="80"></div>
+        <div class="add-task-r2">
+          ${typeChips}
+          <input type="text" class="note-in" placeholder="note…" id="tn-${list.id}" maxlength="80">
+          <input type="datetime-local" class="exp-in" id="te-${list.id}" title="Task expires at this time">
+        </div>
       </div>
       <div class="card-actions">
         <button class="act-btn" onclick="openEditList('${list.id}')">✏️ Edit</button>
@@ -905,179 +842,371 @@ function listCard(list) {
   </div>`;
 }
 
-function selectType(listId,typeId){
-  if(!window._selType)window._selType={};
-  window._selType[listId]=typeId;
+function selType(listId,typeId){
+  _selType[listId]=typeId;
   TASK_TYPES.forEach(ty=>{const el=document.getElementById(`tc-${listId}-${ty.id}`);if(el)el.classList.toggle('sel',ty.id===typeId);});
 }
-function getSelType(listId){return window._selType?.[listId]||'other';}
 function toggleBody(id){document.getElementById(id+'-body')?.classList.toggle('hidden');}
-function toggleTask(listId,taskId){const list=db.lists.find(l=>l.id===listId);const task=list?.tasks?.find(t=>t.id===taskId);if(task){task.done=!task.done;saveDB();renderLists();if(curTab==='nearby')renderNearby();}}
-function deleteTask(listId,taskId){const list=db.lists.find(l=>l.id===listId);if(!list)return;list.tasks=list.tasks.filter(t=>t.id!==taskId);saveDB();renderLists();}
+function toggleTask(listId,taskId){
+  const list=db.lists.find(l=>l.id===listId);
+  const task=list?.tasks?.find(t=>t.id===taskId);
+  if(task){task.done=!task.done;saveDB();renderLists();renderPlaces();if(curTab==='nearby')renderNearby();}
+}
+function deleteTask(listId,taskId){
+  const list=db.lists.find(l=>l.id===listId);if(!list)return;
+  list.tasks=list.tasks.filter(t=>t.id!==taskId);saveDB();renderLists();renderPlaces();
+}
 function addTask(listId){
-  const inp=document.getElementById('ti-'+listId),noteInp=document.getElementById('tn-'+listId);
+  const inp=document.getElementById('ti-'+listId),noteInp=document.getElementById('tn-'+listId),expInp=document.getElementById('te-'+listId);
   const name=inp?.value.trim();if(!name)return;
   const list=db.lists.find(l=>l.id===listId);if(!list)return;
   if(!list.tasks)list.tasks=[];
-  list.tasks.push({id:uid(),name,type:getSelType(listId),note:noteInp?.value.trim()||'',done:false});
+  const expiresAt=expInp&&expInp.value?new Date(expInp.value).toISOString():'';
+  list.tasks.push({id:uid(),name,type:_selType[listId]||'other',note:noteInp?.value.trim()||'',done:false,expiresAt});
+  inp.value='';if(noteInp)noteInp.value='';if(expInp)expInp.value='';
   saveDB();renderLists();
   setTimeout(()=>document.getElementById('lc-'+listId+'-body')?.classList.remove('hidden'),10);
 }
 function uncheckAll(listId){const list=db.lists.find(l=>l.id===listId);if(!list)return;(list.tasks||[]).forEach(t=>t.done=false);saveDB();renderLists();toast('All tasks reset');}
 function delList(listId){if(!confirm('Delete this list?'))return;db.lists=db.lists.filter(l=>l.id!==listId);db.places.forEach(p=>{if(p.listIds)p.listIds=p.listIds.filter(id=>id!==listId);});saveDB();renderAll();toast('List deleted');}
 
-// ═══════════════════════════════════════════
-// RENDER: PLACES
-// ═══════════════════════════════════════════
-function renderPlaces() {
+// ── Render: Places ──
+function renderPlaces(){
   const el=document.getElementById('places-content');
   if(!db.places.length){el.innerHTML=`<div class="empty"><div class="ei">🗺️</div><p>No places yet.<br>Add a shop, office, station, home…</p></div>`;return;}
   const sorted=[...db.places].map(p=>({...p,_d:distTo(p)})).sort((a,b)=>(a._d??1e9)-(b._d??1e9));
   el.innerHTML=sorted.map(place=>{
-    const lists=db.lists.filter(l=>(place.listIds||[]).includes(l.id));
-    const pending=lists.reduce((a,l)=>a+(l.tasks||[]).filter(t=>!t.done).length,0);
+    const allLists=db.lists.filter(l=>(place.listIds||[]).includes(l.id));
+    const pending=allLists.reduce((a,l)=>a+(l.tasks||[]).filter(t=>!t.done).length,0);
     const near=place._d!==null&&place._d!==undefined&&place._d<=prefs.radius;
-    const listRows=lists.map(l=>{const p=(l.tasks||[]).filter(t=>!t.done).length;const col=LIST_COLORS[l.color||'green']||LIST_COLORS.green;return`<div style="display:flex;align-items:center;gap:10px;padding:8px 15px;border-bottom:1px solid var(--border)"><span>${l.emoji||'📋'}</span><span style="flex:1;font-size:13px;font-weight:500">${esc(l.name)}</span><span class="badge" style="background:${col.badge};color:${col.text}">${p} left</span></div>`;}).join('');
+    const rules=place.rules||[];
+    const activeRule=rules.find(r=>ruleMatchesNow(r));
+    const expInfo=fmtExpiry(place.expiresAt);
+    const pinSet=place.geoLat!=null;
+
+    const listRows=allLists.filter(l=>!l._quickFor).map(l=>{
+      const p=(l.tasks||[]).filter(t=>!t.done).length;const col=LIST_COLORS[l.color||'green']||LIST_COLORS.green;
+      return`<div style="display:flex;align-items:center;gap:10px;padding:8px 15px;border-bottom:1px solid var(--border)"><span>${l.emoji||'📋'}</span><span style="flex:1;font-size:13px;font-weight:500">${esc(l.name)}</span><span class="badge" style="background:${col.badge};color:${col.text}">${p} left</span></div>`;
+    }).join('');
+
+    // Quick tasks list rows
+    const quickList=allLists.find(l=>l._quickFor===place.id);
+    const quickTaskRows=quickList?(quickList.tasks||[]).map(task=>{
+      const ty=TASK_TYPES.find(x=>x.id===task.type)||TASK_TYPES[7];
+      const tExp=fmtExpiry(task.expiresAt);
+      return`<div class="task-item"><button class="task-check ${task.done?'done':''}" onclick="toggleTask('${quickList.id}','${task.id}')">✓</button><div class="task-body"><div class="task-name ${task.done?'done':''}">${esc(task.name)}</div><div class="task-meta"><span class="task-type-pill t-${task.type||'other'}">${ty.emoji} ${ty.label}</span>${tExp?`<span class="exp-badge ${tExp.soon?'soon':''}">${tExp.label}</span>`:''}</div></div><button class="task-del" onclick="deleteTask('${quickList.id}','${task.id}')">✕</button></div>`;
+    }).join(''):'';
+
+    const typeOpts=TASK_TYPES.map(ty=>`<option value="${ty.id}">${ty.emoji} ${ty.label}</option>`).join('');
+
     return `<div class="card ${near?'near':''}" id="pc-${place.id}">
       <div class="card-head" onclick="toggleBody('pc-${place.id}')">
         <div class="card-ico">${place.emoji||'📍'}</div>
-        <div class="card-info"><h3>${esc(place.name)}</h3><p>${place.type||'Place'} · ${lists.length} list${lists.length!==1?'s':''} · ${pending} pending</p></div>
+        <div class="card-info">
+          <h3>${esc(place.name)}</h3>
+          <p>${place.type||'Place'} · ${allLists.filter(l=>!l._quickFor).length} list${allLists.filter(l=>!l._quickFor).length!==1?'s':''} · ${pending} pending${rules.length>0?(activeRule?` · <span class="rule-active-pip"></span>Rule active`:` · ${rules.length} rule${rules.length!==1?'s':''}`):''}${pinSet?' · 📌 Pinned':''}</p>
+        </div>
+        ${expInfo?`<span class="exp-badge ${expInfo.soon?'soon':''}" style="margin-right:4px">${expInfo.label}</span>`:''}
         <span class="badge ${distBadge(place._d)}">${fmtDist(place._d)}</span>
       </div>
       <div class="card-body hidden" id="pc-${place.id}-body">
-        ${listRows||'<div style="padding:12px 15px;font-size:13px;color:var(--text3)">No lists attached</div>'}
+        ${listRows||''}
+        ${quickTaskRows}
+        <!-- Quick add task directly to place -->
+        <div class="place-quick">
+          <input type="text" id="pq-input-${place.id}" placeholder="Quick task…" maxlength="100" onkeydown="if(event.key==='Enter')addQuickTask('${place.id}')">
+          <select id="pq-type-${place.id}">${typeOpts}</select>
+          <input type="datetime-local" class="exp-in" id="pq-exp-${place.id}" title="Task expires" style="max-width:140px">
+          <button class="icon-btn" onclick="addQuickTask('${place.id}')">+</button>
+        </div>
+        <!-- GPS pin update row -->
+        <div class="pin-update-row">
+          <div class="pu-info">${pinSet?`<strong>GPS Pin:</strong> ${place.geoLat.toFixed(5)}, ${place.geoLng.toFixed(5)}`:'No GPS pin set — using address coords for proximity'}</div>
+          <button class="pin-update-btn" onclick="updateGeoPinForPlace('${place.id}')">📍 ${pinSet?'Re-pin':'Pin Here'}</button>
+        </div>
         <div class="card-actions">
           <button class="act-btn" onclick="openEditPlace('${place.id}')">✏️ Edit</button>
           <button class="act-btn red" onclick="delPlace('${place.id}')">🗑 Delete</button>
-          <span class="linked-pill">${place.lat.toFixed(4)}, ${place.lng.toFixed(4)}</span>
+          <span class="linked-pill">${place.lat!=null?place.lat.toFixed(4)+', '+place.lng.toFixed(4):''}</span>
         </div>
       </div>
     </div>`;
   }).join('');
 }
-function delPlace(id){if(!confirm('Delete this place?'))return;db.places=db.places.filter(p=>p.id!==id);alertedPlaces.delete(id);saveDB();renderAll();toast('Place deleted');}
 
-// ═══════════════════════════════════════════
-// LIST MODAL
-// ═══════════════════════════════════════════
-function openListModal(){document.getElementById('list-modal-title').textContent='New Task List';document.getElementById('lm-name').value='';document.getElementById('lm-emoji').value='';document.getElementById('lm-color').value='green';document.getElementById('lm-id').value='';openOverlay('list-overlay');}
-function openEditList(id){const l=db.lists.find(x=>x.id===id);if(!l)return;document.getElementById('list-modal-title').textContent='Edit List';document.getElementById('lm-name').value=l.name;document.getElementById('lm-emoji').value=l.emoji||'';document.getElementById('lm-color').value=l.color||'green';document.getElementById('lm-id').value=id;openOverlay('list-overlay');}
-function saveList(){const name=document.getElementById('lm-name').value.trim();if(!name){toast('Enter a list name');return;}const id=document.getElementById('lm-id').value;if(id){const l=db.lists.find(x=>x.id===id);if(l){l.name=name;l.emoji=document.getElementById('lm-emoji').value.trim();l.color=document.getElementById('lm-color').value;}}else{db.lists.push({id:uid(),name,emoji:document.getElementById('lm-emoji').value.trim(),color:document.getElementById('lm-color').value,tasks:[]});}saveDB();renderLists();populateAISel();closeOverlay('list-overlay');toast('✓ List saved');}
+function delPlace(id){if(!confirm('Delete this place?'))return;db.places=db.places.filter(p=>p.id!==id);alertedPlaces.delete(id);// also remove auto quick list
+db.lists=db.lists.filter(l=>l._quickFor!==id);saveDB();renderAll();toast('Place deleted');}
 
-// ═══════════════════════════════════════════
-// PLACE MODAL
-// ═══════════════════════════════════════════
-function openPlaceModal(prefill) {
+// Update GPS pin directly from place card
+function updateGeoPinForPlace(placeId){
+  if(!curPos){toast('Start GPS first, then stand at the exact spot');return;}
+  const place=db.places.find(p=>p.id===placeId);if(!place)return;
+  place.geoLat=curPos.coords.latitude;place.geoLng=curPos.coords.longitude;
+  const acc=Math.round(curPos.coords.accuracy);
+  saveDB();renderPlaces();toast(`📍 Pin set — accuracy ±${acc}m`);
+}
+
+// ── Address Search ──
+let _addrTimer=null;
+document.getElementById('addr-input').addEventListener('input',()=>{
+  clearTimeout(_addrTimer);
+  const v=document.getElementById('addr-input').value.trim();
+  if(v.length<3){hideAddrResults();return;}
+  _addrTimer=setTimeout(searchAddress,600);
+});
+
+async function searchAddress(){
+  const q=document.getElementById('addr-input').value.trim();
+  if(!q||q.length<2)return;
+  const rEl=document.getElementById('addr-results');
+  rEl.className='addr-results show';
+  rEl.innerHTML='<div class="addr-status"><div class="spinner"></div> Searching…</div>';
+  try{
+    const res=await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}&limit=6&addressdetails=1`,{headers:{'Accept-Language':'en'}});
+    const data=await res.json();
+    if(!data.length){rEl.innerHTML='<div class="addr-status">No results found.</div>';return;}
+    window._addrResults=data;
+    rEl.innerHTML=data.map((r,i)=>{
+      const name=r.namedetails?.name||r.display_name.split(',')[0];
+      const icon=osmIcon(r.type,r.class);
+      return`<div class="addr-result-item" onclick="pickAddress(${i})"><span class="ar-icon">${icon}</span><div class="ar-text"><div class="ar-name">${esc(name)}</div><div class="ar-addr">${esc(r.display_name)}</div></div></div>`;
+    }).join('');
+  }catch{rEl.innerHTML='<div class="addr-status">Search failed. Check connection.</div>';}
+}
+
+function osmIcon(type,cls){
+  const m={supermarket:'🛒',convenience:'🛒',grocery:'🛒',pharmacy:'💊',hospital:'🏥',doctors:'🏥',clinic:'🏥',restaurant:'🍽️',cafe:'☕',fast_food:'🍔',bar:'🍺',pub:'🍺',library:'📚',school:'🏫',university:'🎓',fuel:'⛽',parking:'🅿️',post_office:'📮',bank:'🏦',atm:'🏧',station:'🚉',bus_station:'🚌',bus_stop:'🚌',subway:'🚇',airport:'✈️',hotel:'🏨',park:'🌳',gym:'💪',sports_centre:'🏟️',cinema:'🎬',theatre:'🎭',museum:'🏛️',charging_station:'🔌',police:'🚓',fire_station:'🚒',house:'🏠',apartments:'🏢',office:'🏢'};
+  return m[type]||(cls==='highway'?'🛣️':cls==='waterway'?'💧':'📍');
+}
+
+function pickAddress(idx){
+  const r=window._addrResults?.[idx];if(!r)return;
+  const lat=parseFloat(r.lat),lng=parseFloat(r.lon);
+  const name=r.namedetails?.name||r.display_name.split(',')[0];
+  document.getElementById('pm-addr-lat').value=lat;
+  document.getElementById('pm-addr-lng').value=lng;
+  document.getElementById('pm-geo-lat').value='';
+  document.getElementById('pm-geo-lng').value='';
+  document.getElementById('pm-lat').value=lat.toFixed(6);
+  document.getElementById('pm-lng').value=lng.toFixed(6);
+  if(!document.getElementById('pm-name').value.trim())document.getElementById('pm-name').value=name;
+  document.getElementById('pm-addr-disp').textContent=`${r.display_name.split(',').slice(0,2).join(',')} (${lat.toFixed(5)}, ${lng.toFixed(5)})`;
+  document.getElementById('pm-addr-disp').className='geo-val set';
+  document.getElementById('pm-geo-disp').textContent='Same as address';
+  document.getElementById('pm-geo-disp').className='geo-val';
+  document.getElementById('addr-input').value=name;
+  hideAddrResults();
+}
+
+function hideAddrResults(){document.getElementById('addr-results').className='addr-results';}
+
+function modalUpdateGeoPin(){
+  if(!curPos){toast('Start GPS first, then stand at the exact spot');return;}
+  const lat=curPos.coords.latitude,lng=curPos.coords.longitude,acc=Math.round(curPos.coords.accuracy);
+  document.getElementById('pm-geo-lat').value=lat;
+  document.getElementById('pm-geo-lng').value=lng;
+  document.getElementById('pm-geo-disp').textContent=`${lat.toFixed(6)}, ${lng.toFixed(6)} (±${acc}m)`;
+  document.getElementById('pm-geo-disp').className='geo-val set';
+  toast(`📍 GPS pin set — accuracy ±${acc}m`);
+}
+
+function onManualCoordChange(){
+  const lat=parseFloat(document.getElementById('pm-lat').value);
+  const lng=parseFloat(document.getElementById('pm-lng').value);
+  if(!isNaN(lat)&&!isNaN(lng)){
+    document.getElementById('pm-addr-lat').value=lat;
+    document.getElementById('pm-addr-lng').value=lng;
+    document.getElementById('pm-addr-disp').textContent=`${lat.toFixed(6)}, ${lng.toFixed(6)} (manual)`;
+    document.getElementById('pm-addr-disp').className='geo-val set';
+  }
+}
+
+function toggleManualCoords(){
+  manualOpen=!manualOpen;
+  const area=document.getElementById('manual-coords-area');
+  const btn=document.getElementById('manual-coords-btn');
+  area.style.display=manualOpen?'flex':'none';
+  btn.textContent=manualOpen?'▲ Hide manual coordinates':'⌨ Manual coordinates';
+}
+
+// ── List Modal ──
+function openListModal(){
+  document.getElementById('list-modal-title').textContent='New Task List';
+  document.getElementById('lm-name').value='';document.getElementById('lm-emoji').value='';
+  document.getElementById('lm-color').value='green';document.getElementById('lm-expires').value='';
+  document.getElementById('lm-id').value='';openOverlay('list-overlay');
+}
+function openEditList(id){
+  const l=db.lists.find(x=>x.id===id);if(!l)return;
+  document.getElementById('list-modal-title').textContent='Edit List';
+  document.getElementById('lm-name').value=l.name;document.getElementById('lm-emoji').value=l.emoji||'';
+  document.getElementById('lm-color').value=l.color||'green';
+  document.getElementById('lm-expires').value=l.expiresAt?l.expiresAt.slice(0,16):'';
+  document.getElementById('lm-id').value=id;openOverlay('list-overlay');
+}
+function saveList(){
+  const name=document.getElementById('lm-name').value.trim();if(!name){toast('Enter a list name');return;}
+  const id=document.getElementById('lm-id').value;
+  const expiresAt=document.getElementById('lm-expires').value?new Date(document.getElementById('lm-expires').value).toISOString():'';
+  if(id){const l=db.lists.find(x=>x.id===id);if(l){l.name=name;l.emoji=document.getElementById('lm-emoji').value.trim();l.color=document.getElementById('lm-color').value;l.expiresAt=expiresAt;}}
+  else db.lists.push({id:uid(),name,emoji:document.getElementById('lm-emoji').value.trim(),color:document.getElementById('lm-color').value,tasks:[],expiresAt});
+  saveDB();renderLists();populateAISel();closeOverlay('list-overlay');toast('✓ List saved');
+}
+
+// ── Place Modal ──
+function openPlaceModal(prefill){
   document.getElementById('place-modal-title').textContent='Add Place';
   document.getElementById('pm-name').value=prefill?.name||'';
   document.getElementById('pm-emoji').value=prefill?.emoji||'';
   document.getElementById('pm-type').value=prefill?.type||'';
   document.getElementById('addr-input').value='';
-  _pickedLat=null; _pickedLng=null;
-  document.getElementById('pm-lat').value='';
-  document.getElementById('pm-lng').value='';
-  document.getElementById('pm-lat-hidden').value='';
-  document.getElementById('pm-lng-hidden').value='';
-  document.getElementById('coords-confirm').classList.remove('show');
-  hideAddrResults();
-  document.getElementById('pm-id').value='';
-  // Reset manual coords
-  if(manualCoordsOpen){toggleManualCoords();}
-  renderPlaceListLinks(null);
+  ['pm-addr-lat','pm-addr-lng','pm-geo-lat','pm-geo-lng','pm-lat','pm-lng'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('pm-addr-disp').textContent='Not set';document.getElementById('pm-addr-disp').className='geo-val';
+  document.getElementById('pm-geo-disp').textContent='Same as address';document.getElementById('pm-geo-disp').className='geo-val';
+  document.getElementById('pm-expires').value='';document.getElementById('pm-id').value='';
+  hideAddrResults();if(manualOpen)toggleManualCoords();
+  renderPlaceListLinks(null);_modalRules=[];renderModalRules();
   openOverlay('place-overlay');
 }
-
-function openEditPlace(id) {
+function openEditPlace(id){
   const place=db.places.find(p=>p.id===id);if(!place)return;
   document.getElementById('place-modal-title').textContent='Edit Place';
   document.getElementById('pm-name').value=place.name;
   document.getElementById('pm-emoji').value=place.emoji||'';
   document.getElementById('pm-type').value=place.type||'';
   document.getElementById('addr-input').value='';
-  _pickedLat=place.lat; _pickedLng=place.lng;
-  document.getElementById('pm-lat').value=place.lat;
-  document.getElementById('pm-lng').value=place.lng;
-  document.getElementById('pm-lat-hidden').value=place.lat;
-  document.getElementById('pm-lng-hidden').value=place.lng;
-  const confirmEl=document.getElementById('coords-confirm');
-  document.getElementById('coords-confirm-text').textContent=`${place.lat.toFixed(5)}, ${place.lng.toFixed(5)}`;
-  confirmEl.classList.add('show');
+  document.getElementById('pm-addr-lat').value=place.lat||'';
+  document.getElementById('pm-addr-lng').value=place.lng||'';
+  document.getElementById('pm-geo-lat').value=place.geoLat||'';
+  document.getElementById('pm-geo-lng').value=place.geoLng||'';
+  document.getElementById('pm-lat').value=String(place.lat||'');
+  document.getElementById('pm-lng').value=String(place.lng||'');
+  document.getElementById('pm-addr-disp').textContent=place.lat?`${place.lat.toFixed(5)}, ${place.lng.toFixed(5)}`:'Not set';
+  document.getElementById('pm-addr-disp').className=place.lat?'geo-val set':'geo-val';
+  document.getElementById('pm-geo-disp').textContent=place.geoLat?`${place.geoLat.toFixed(6)}, ${place.geoLng.toFixed(6)} (pinned)`:'Same as address';
+  document.getElementById('pm-geo-disp').className=place.geoLat?'geo-val set':'geo-val';
+  document.getElementById('pm-expires').value=place.expiresAt?place.expiresAt.slice(0,16):'';
   document.getElementById('pm-id').value=id;
-  renderPlaceListLinks(place.listIds||[]);
+  hideAddrResults();if(manualOpen)toggleManualCoords();
+  renderPlaceListLinks(place.listIds?.filter(id=>!db.lists.find(l=>l.id===id)?._quickFor)||[]);
+  _modalRules=JSON.parse(JSON.stringify(place.rules||[]));renderModalRules();
   openOverlay('place-overlay');
 }
-
-function renderPlaceListLinks(selectedIds) {
+function renderPlaceListLinks(selectedIds){
   const el=document.getElementById('pm-list-links');
-  if(!db.lists.length){el.innerHTML=`<div style="font-size:12px;color:var(--text3);font-family:'Geist Mono',monospace">No lists yet — create one first.</div>`;return;}
-  el.innerHTML=db.lists.map(list=>{
+  const regularLists=db.lists.filter(l=>!l._quickFor);
+  if(!regularLists.length){el.innerHTML=`<div style="font-size:12px;color:var(--text3);font-family:'Geist Mono',monospace">No lists yet — create one in the Lists tab first.</div>`;return;}
+  el.innerHTML=regularLists.map(list=>{
     const sel=selectedIds&&selectedIds.includes(list.id);
     const col=LIST_COLORS[list.color||'green']||LIST_COLORS.green;
-    return `<div class="list-link-row ${sel?'sel':''}" onclick="toggleListLink('${list.id}',this)"><span class="ll-ico">${list.emoji||'📋'}</span><div class="ll-text"><div class="ll-name" style="color:${col.text}">${esc(list.name)}</div><div class="ll-meta">${(list.tasks||[]).length} tasks</div></div><span class="ll-check">${sel?'✓':''}</span></div>`;
+    return`<div class="list-link-row ${sel?'sel':''}" onclick="toggleListLink('${list.id}',this)"><span class="ll-ico">${list.emoji||'📋'}</span><div class="ll-text"><div class="ll-name" style="color:${col.text}">${esc(list.name)}</div><div class="ll-meta">${(list.tasks||[]).length} tasks</div></div><span class="ll-check">${sel?'✓':''}</span></div>`;
   }).join('');
 }
-
 function toggleListLink(listId,el){el.classList.toggle('sel');el.querySelector('.ll-check').textContent=el.classList.contains('sel')?'✓':'';}
-
 function getLinkedListIds(){
-  return [...document.querySelectorAll('#pm-list-links .list-link-row.sel')]
-    .map(el=>{const fn=el.getAttribute('onclick')||'';const m=fn.match(/'([^']+)'/);return m?m[1]:null;})
-    .filter(Boolean);
+  return[...document.querySelectorAll('#pm-list-links .list-link-row.sel')]
+    .map(el=>{const m=(el.getAttribute('onclick')||'').match(/'([^']+)'/);return m?m[1]:null;}).filter(Boolean);
 }
-
-function savePlace() {
-  const name=document.getElementById('pm-name').value.trim();
-  if(!name){toast('Enter a place name');return;}
-
-  // Prefer picked coords, fall back to manual fields
-  let lat=_pickedLat??parseFloat(document.getElementById('pm-lat').value);
-  let lng=_pickedLng??parseFloat(document.getElementById('pm-lng').value);
-  if(isNaN(lat)||isNaN(lng)||lat<-90||lat>90||lng<-180||lng>180){toast('Set a location — search an address or use GPS');return;}
-
+function savePlace(){
+  const name=document.getElementById('pm-name').value.trim();if(!name){toast('Enter a place name');return;}
+  const lat=parseFloat(document.getElementById('pm-addr-lat').value);
+  const lng=parseFloat(document.getElementById('pm-addr-lng').value);
+  if(isNaN(lat)||isNaN(lng)){toast('Set a location — search an address or enter coordinates');return;}
+  const geoLat=parseFloat(document.getElementById('pm-geo-lat').value)||null;
+  const geoLng=parseFloat(document.getElementById('pm-geo-lng').value)||null;
+  const expiresAt=document.getElementById('pm-expires').value?new Date(document.getElementById('pm-expires').value).toISOString():'';
   const listIds=getLinkedListIds();
   const id=document.getElementById('pm-id').value;
-  const data={name,lat,lng,emoji:document.getElementById('pm-emoji').value.trim(),type:document.getElementById('pm-type').value.trim(),listIds};
+  const data={name,lat,lng,geoLat,geoLng,emoji:document.getElementById('pm-emoji').value.trim(),type:document.getElementById('pm-type').value.trim(),listIds,rules:JSON.parse(JSON.stringify(_modalRules)),expiresAt};
   if(id){const p=db.places.find(x=>x.id===id);if(p)Object.assign(p,data);}
   else db.places.push({id:uid(),...data});
   saveDB();renderAll();closeOverlay('place-overlay');toast('✓ Place saved');
 }
 
-// ═══════════════════════════════════════════
-// AI FIND
-// ═══════════════════════════════════════════
-function populateAISel(){const sel=document.getElementById('ai-list-sel');const cur=sel.value;sel.innerHTML='<option value="">— choose a list —</option>'+db.lists.map(l=>`<option value="${l.id}" ${l.id===cur?'selected':''}>${l.emoji||'📋'} ${esc(l.name)}</option>`).join('');}
+// ── Alert Rules ──
+function addRuleToModal(){
+  _modalRules.push({id:uid(),label:'',timeFrom:'',timeTo:'',days:[],dates:[],listIds:[]});
+  renderModalRules();
+  setTimeout(()=>document.getElementById('pm-rules').lastElementChild?.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+}
+function removeRule(idx){_modalRules.splice(idx,1);renderModalRules();}
 
+function renderModalRules(){
+  const el=document.getElementById('pm-rules');if(!el)return;
+  const linkedIds=getLinkedListIds();
+  const linkedLists=db.lists.filter(l=>linkedIds.includes(l.id)&&!l._quickFor);
+  if(!_modalRules.length){el.innerHTML='<div style="font-size:12px;color:var(--text3);font-family:\'Geist Mono\',monospace;padding:4px 0">No rules — place alerts any time it is in range.</div>';return;}
+  el.innerHTML=_modalRules.map((rule,idx)=>{
+    const activeNow=ruleMatchesNow(rule);
+    const timeLabel=rule.timeFrom&&rule.timeTo?`${rule.timeFrom}–${rule.timeTo}`:rule.timeFrom?`from ${rule.timeFrom}`:rule.timeTo?`until ${rule.timeTo}`:'Any time';
+    const dayLabel=rule.days.length===0?'Every day':rule.days.map(d=>DAY_SHORT[d]).join(' ');
+    const dateLabel=rule.dates.length>0?` · ${rule.dates.length} date${rule.dates.length!==1?'s':''}`:'' ;
+    const dayBtns=DAY_SHORT.map((d,i)=>`<button class="day-btn ${rule.days.includes(i)?'sel':''}" onclick="toggleRuleDay(${idx},${i})">${d}</button>`).join('');
+    const dateChips=rule.dates.map(dt=>`<span class="date-chip">${dt}<button onclick="removeRuleDate(${idx},'${dt}')">✕</button></span>`).join('');
+    let listSelHtml='';
+    if(linkedLists.length>0){
+      listSelHtml=`<div class="field" style="gap:5px"><label style="font-size:9px">Show lists</label>${linkedLists.map(l=>{const sel=rule.listIds.length===0||rule.listIds.includes(l.id);const col=LIST_COLORS[l.color||'green']||LIST_COLORS.green;return`<div class="rule-list-item ${sel?'sel':''}" onclick="toggleRuleList(${idx},'${l.id}',this)"><span class="rli-check">${sel?'✓':''}</span><span class="rli-label" style="color:${col.text}">${l.emoji||'📋'} ${esc(l.name)}</span></div>`;}).join('')}</div>`;
+    }
+    return`<div class="rule-card ${activeNow?'active-now':''}">
+      <div class="rule-head" onclick="toggleBody('rule-body-${idx}')">
+        <span class="rh-icon">🕐</span>
+        <div class="rh-info"><div class="rh-label">${rule.label||'Unnamed rule'}</div><div class="rh-meta">${timeLabel} · ${dayLabel}${dateLabel}</div></div>
+        ${activeNow?'<span class="rh-badge" style="background:rgba(74,222,128,.15);color:var(--near)">Active</span>':''}
+        <button class="rh-del" onclick="event.stopPropagation();removeRule(${idx})">✕</button>
+      </div>
+      <div class="rule-body hidden" id="rule-body-${idx}-body">
+        <div class="field"><label>Label</label><input type="text" value="${esc(rule.label)}" placeholder="Morning commute, Saturday shop…" maxlength="50" oninput="_modalRules[${idx}].label=this.value"></div>
+        <div class="field"><label>Time Window</label><div class="time-row"><input type="time" value="${rule.timeFrom}" oninput="_modalRules[${idx}].timeFrom=this.value"><span class="time-sep">to</span><input type="time" value="${rule.timeTo}" oninput="_modalRules[${idx}].timeTo=this.value"></div><div style="font-size:10px;color:var(--text3);font-family:'Geist Mono',monospace;margin-top:3px">Leave blank for any time</div></div>
+        <div class="field"><label>Days of Week</label><div class="day-picker">${dayBtns}</div><div style="font-size:10px;color:var(--text3);font-family:'Geist Mono',monospace;margin-top:3px">None = every day</div></div>
+        <div class="field"><label>Specific Dates</label><div style="display:flex;gap:6px"><input type="date" id="dp-${idx}" style="flex:1"><button class="icon-btn neutral" onclick="addRuleDate(${idx})" style="font-size:13px">+</button></div>${rule.dates.length?`<div class="date-chips">${dateChips}</div>`:''}<div style="font-size:10px;color:var(--text3);font-family:'Geist Mono',monospace;margin-top:3px">Specific dates always match regardless of day setting</div></div>
+        ${listSelHtml}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleRuleDay(idx,d){const r=_modalRules[idx];if(!r)return;const i=r.days.indexOf(d);i===-1?r.days.push(d):r.days.splice(i,1);r.days.sort();renderModalRules();document.getElementById(`rule-body-${idx}-body`)?.classList.remove('hidden');}
+function addRuleDate(idx){const inp=document.getElementById(`dp-${idx}`);if(!inp?.value){toast('Pick a date');return;}_modalRules[idx].dates.push(inp.value);_modalRules[idx].dates.sort();renderModalRules();document.getElementById(`rule-body-${idx}-body`)?.classList.remove('hidden');}
+function removeRuleDate(idx,dt){_modalRules[idx].dates=_modalRules[idx].dates.filter(d=>d!==dt);renderModalRules();document.getElementById(`rule-body-${idx}-body`)?.classList.remove('hidden');}
+function toggleRuleList(idx,listId,el){
+  const r=_modalRules[idx];if(!r)return;
+  if(r.listIds.length===0)r.listIds=getLinkedListIds();
+  const i=r.listIds.indexOf(listId);i===-1?r.listIds.push(listId):r.listIds.splice(i,1);
+  if(r.listIds.length===getLinkedListIds().length)r.listIds=[];
+  renderModalRules();document.getElementById(`rule-body-${idx}-body`)?.classList.remove('hidden');
+}
+
+// ── AI Find ──
+function populateAISel(){const sel=document.getElementById('ai-list-sel');const cur=sel.value;sel.innerHTML='<option value="">— choose a list —</option>'+db.lists.filter(l=>!l._quickFor).map(l=>`<option value="${l.id}" ${l.id===cur?'selected':''}>${l.emoji||'📋'} ${esc(l.name)}</option>`).join('');}
 async function runAI(){
   const listId=document.getElementById('ai-list-sel').value;if(!listId){toast('Choose a list first');return;}
   const list=db.lists.find(l=>l.id===listId);if(!list)return;
   const tasks=list.tasks||[];if(!tasks.length){toast('List has no tasks');return;}
   const summary=tasks.map(t=>{const ty=TASK_TYPES.find(x=>x.id===t.type)||TASK_TYPES[7];return`${ty.label}: ${t.name}${t.note?` (${t.note})`:''}`;}).join('\n');
-  document.getElementById('ai-loading').classList.add('show');
-  document.getElementById('ai-results').innerHTML='';
-  const prompt=`You are a helpful assistant. Someone has a task list. Analyse the tasks and suggest 4–6 types of real-world locations or venues they'd need to visit to complete them.\n\nTasks:\n${summary}\n\nRules:\n- Be specific and practical\n- Consider ALL task types: Buy, Collect, Do, Charge, Return, Drop off, Remind, etc.\n- For charge tasks, suggest cafés, libraries, train stations\n- For collect tasks, suggest post offices, delivery depots\n- Think creatively for non-shopping tasks\n\nRespond ONLY with a JSON array:\n[{"emoji":"🏪","name":"Supermarket","why":"Buy grocery items"}]`;
+  document.getElementById('ai-loading').classList.add('show');document.getElementById('ai-results').innerHTML='';
+  const prompt=`You are a helpful assistant. Analyse these tasks and suggest 4–6 types of real-world places to visit.\n\nTasks:\n${summary}\n\n- Be specific (Pharmacy not Shop)\n- Consider all types: Buy, Collect, Do, Charge, Return, Drop off, Remind\n- Charge tasks → cafés, libraries, stations\n- Collect tasks → post offices, depots\n\nRespond ONLY with JSON array:\n[{"emoji":"🏪","name":"Supermarket","why":"Buy grocery items"}]`;
   try{
     const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})});
     const data=await res.json();
     const text=(data.content?.[0]?.text||'').replace(/```json|```/g,'').trim();
     const suggestions=JSON.parse(text);
     document.getElementById('ai-results').innerHTML=suggestions.map(s=>`<div class="ai-suggestion" onclick='addAISuggestion(${JSON.stringify(s)})'><span class="ai-sug-ico">${s.emoji||'📍'}</span><div class="ai-sug-body"><div class="ai-sug-name">${esc(s.name)}</div><div class="ai-sug-why">${esc(s.why)}</div></div><span class="ai-sug-action">Add →</span></div>`).join('');
-  }catch(e){document.getElementById('ai-results').innerHTML=`<div style="font-size:12px;color:var(--text3);font-family:'Geist Mono',monospace">Couldn't get suggestions.</div>`;}
+  }catch{document.getElementById('ai-results').innerHTML='<div style="font-size:12px;color:var(--text3);font-family:\'Geist Mono\',monospace">Couldn\'t get suggestions.</div>';}
   document.getElementById('ai-loading').classList.remove('show');
 }
-
 function addAISuggestion(s){openPlaceModal({name:s.name,emoji:s.emoji,type:s.name});goTab('places');toast('Search for the address to set location');}
 
-// ═══════════════════════════════════════════
-// SETTINGS
-// ═══════════════════════════════════════════
+// ── Settings ──
 function togglePref(k){prefs[k]=!prefs[k];savePrefs();applyPrefs();}
-function applyPrefs(){['vibe','visual','skipdone','reentry'].forEach(k=>{const el=document.getElementById('t-'+k);if(el)el.className='toggle'+(prefs[k]?' on':'');});document.getElementById('radius-slider').value=prefs.radius;document.getElementById('radius-display').textContent=prefs.radius+'m';}
+function applyPrefs(){
+  ['vibe','visual','skipdone','reentry'].forEach(k=>{const el=document.getElementById('t-'+k);if(el)el.className='toggle'+(prefs[k]?' on':'');});
+  document.getElementById('radius-slider').value=prefs.radius;
+  document.getElementById('radius-display').textContent=prefs.radius+'m';
+}
 function setRadius(v){prefs.radius=parseInt(v);document.getElementById('radius-display').textContent=v+'m';savePrefs();alertedPlaces.clear();renderAll();}
 function clearAll(){db={lists:[],places:[]};alertedPlaces.clear();saveDB();renderAll();toast('All data cleared');}
 
-// ═══════════════════════════════════════════
-// OVERLAYS / TOAST
-// ═══════════════════════════════════════════
+// ── Overlays / Toast ──
 function openOverlay(id){document.getElementById(id).classList.add('show');}
 function closeOverlay(id){document.getElementById(id).classList.remove('show');}
 let _tt;
